@@ -1,0 +1,2481 @@
+{
+  "status": "pass",
+  "checked_at_utc": "2026-10-25T06:04:21.569936+00:00",
+  "scope": "E101-E160 factual primary-reference and external-material audit; runtime/numerical tests are separate.",
+  "final_verified": true,
+  "fatal_issues": [],
+  "app_count": 60,
+  "original_unique_url_count": 67,
+  "proposal_count": 14,
+  "new_unique_url_count": 67,
+  "http_only_exceptions": [
+    "https://mooseframework.inl.gov/bison/verification/ECAR_131/ECAR_131.html",
+    "https://sciencedemonstrations.fas.harvard.edu/presentations/faraday-rotation",
+    "https://www.analog.com/en/resources/analog-dialogue/articles/ac-and-dc-data-acquisition-signal-chains-made-easy.html",
+    "https://www.analog.com/en/resources/faqs/FAQ_Using_the_ADC_SNRmethod_what_is_the_equivalent.html",
+    "https://www.analog.com/media/en/training-seminars/tutorials/MT-001.pdf",
+    "https://www.usbr.gov/ssle/damsafety/risk/BestPractices/Chapters/F3-CavitationDamageInducedFailureOfSpillways.pdf"
+  ],
+  "reuse_policy": "No outside copyrighted expression is included or relicensed. All external references are citation-only. reuse_allowed=false grants no right to copy expression. Formula facts and source links inform independently authored code and explanations. Restrictive NC/ND and publisher-owned source expressions are not imported.",
+  "audit_gate_note": "Recommended references incorporate source-proposals.json. Integrator must apply proposals to catalog/tools and per-app SOURCES before release. This pass verifies reference models, not final numerical/browser output.",
+  "constants_audit": {
+    "verified": true,
+    "source_url": "https://physics.nist.gov/cuu/Constants/Table/allascii.txt",
+    "release": "2022 CODATA, current NIST verified 2026-10-25",
+    "values": {
+      "G": 6.6743e-11,
+      "kB": 1.380649e-23,
+      "h": 6.62607015e-34,
+      "c": 299792458,
+      "e": 1.602176634e-19,
+      "NA": 6.02214076e+23,
+      "R": 8.31446261815324,
+      "F": 96485.33212331001,
+      "epsilon0": 8.8541878188e-12,
+      "mu0": 1.25663706127e-06,
+      "u": 1.66053906892e-27,
+      "g0": 9.80665
+    },
+    "classification": "h,c,e,kB,NA are exact SI defining constants. R=NA*kB and F=NA*e are exact products rounded for binary64; hbar=h/(2*pi). G,epsilon0,mu0,u are measured 2022 CODATA values. g0 is conventional exact standard gravity, not local measured gravity.",
+    "hydrogen_rydberg": {
+      "E113_default_per_m": 10967760.0,
+      "kind": "Explicitly labeled educational finite-nuclear-mass hydrogen approximation, not CODATA R_infinity.",
+      "R_infinity_per_m": 10973731.568157,
+      "R_infinity_source": "https://physics.nist.gov/cgi-bin/cuu/Value?ryd",
+      "claim_limit": "Not precision spectroscopy; fine structure, isotope corrections and Lamb shift excluded."
+    }
+  },
+  "records": [
+    {
+      "id": "E101",
+      "slug": "eng-rocket-delta-v",
+      "title": "Tsiolkovsky Rocket Delta V Calculator",
+      "formula": "Δv = v_e ln(m₀/m_f)",
+      "factual_model_verified": true,
+      "topic_review": "Verified factual model: Δv = v_e ln(m₀/m_f). Scope reviewed: Required: m₀≥m_f>0 and 0<v_e<c. Both masses include the complete vehicle immediately before and after this burn. Classical motion with constant effective exhaust speed and aligned exhaust is assumed. Effective speed may include an equivalent pressure-thrust contribution. Excluded: gravity losses, drag, external forces, jettison and stage separation. Results Δv≥c are rejected; relativistic motion requires a relativistic rocket equation.",
+      "recommended_sources": [
+        {
+          "label": "NASA Glenn · Ideal Rocket Equation",
+          "url": "https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/ideal-rocket-equation/",
+          "http_status": 200,
+          "final_url": "https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/ideal-rocket-equation/",
+          "page_title": "Ideal Rocket Equation | Glenn Research Center | NASA",
+          "content_type": "text/html; charset=UTF-8",
+          "invalid_response": false,
+          "web_primary_verified": false,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/ideal-rocket-equation/",
+          "primary_organization": "www1.grc.nasa.gov"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "NASA Glenn · Ideal Rocket Equation",
+          "url": "https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/ideal-rocket-equation/"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E102",
+      "slug": "eng-rocket-nozzle-thrust",
+      "title": "Rocket Nozzle Thrust Calculator",
+      "formula": "F = ṁv_e + (p_e−p_a)A_e",
+      "factual_model_verified": true,
+      "topic_review": "Verified factual model: F = ṁv_e + (p_e−p_a)A_e. Scope reviewed: Required: ṁ,A_e>0, 0<v_e<c and nonnegative absolute pressures. Quasi-steady axial exhaust with uniform exit velocity and pressure is assumed, without external air ingestion. Excluded: internal nozzle solutions, efficiency, back-pressure separation and unsteady flow. The pressure contribution may be negative; the output is signed along the chosen thrust axis.",
+      "recommended_sources": [
+        {
+          "label": "NASA Glenn · Rocket Thrust Equation",
+          "url": "https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/rocket-thrust-equation/",
+          "http_status": 200,
+          "final_url": "https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/rocket-thrust-equation/",
+          "page_title": "Rocket Thrust Equation | Glenn Research Center | NASA",
+          "content_type": "text/html; charset=UTF-8",
+          "invalid_response": false,
+          "web_primary_verified": false,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/rocket-thrust-equation/",
+          "primary_organization": "www1.grc.nasa.gov"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "NASA Glenn · Rocket Thrust Equation",
+          "url": "https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/rocket-thrust-equation/"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E103",
+      "slug": "eng-tidal-acceleration",
+      "title": "Tidal Differential Acceleration Calculator",
+      "formula": "Δg = GM(1/r₁² − 1/r₂²)",
+      "factual_model_verified": true,
+      "topic_review": "Verified factual model: Δg = GM(1/r₁² − 1/r₂²). Scope reviewed: Required: M>0 and r₂≥r₁>0, with both points on the same outward radial ray and outside a spherical body. Inputs are center distances. This app restricts weak-field use to r_s/r₁≤0.01. The output is a differential acceleration, not force, stress or a three-dimensional tidal tensor. Excluded: rotation, other bodies and structural response.",
+      "recommended_sources": [
+        {
+          "label": "OpenStax · Newton’s Universal Law of Gravitation",
+          "url": "https://openstax.org/books/college-physics-ap-courses-2e/pages/6-5-newtons-universal-law-of-gravitation",
+          "http_status": 200,
+          "final_url": "https://openstax.org/books/college-physics-ap-courses-2e/pages/6-5-newtons-universal-law-of-gravitation",
+          "page_title": "6.5 Newton’s Universal Law of Gravitation - College Physics for AP® Courses 2e | OpenStax",
+          "content_type": "text/html",
+          "invalid_response": false,
+          "web_primary_verified": false,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://openstax.org/books/college-physics-ap-courses-2e/pages/6-5-newtons-universal-law-of-gravitation",
+          "primary_organization": "openstax.org"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "OpenStax · Newton’s Universal Law of Gravitation",
+          "url": "https://openstax.org/books/college-physics-ap-courses-2e/pages/6-5-newtons-universal-law-of-gravitation"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E104",
+      "slug": "eng-hill-radius",
+      "title": "Hill Sphere Radius Calculator",
+      "formula": "r_H = a (m/(3M))^(1/3)",
+      "factual_model_verified": true,
+      "topic_review": "Verified factual model: r_H = a (m/(3M))^(1/3). Scope reviewed: Required: positive inputs, a circular restricted three-body setting, m/M≤0.01 and r_s(M)/a≤0.01. The orbit must be external and nonintersecting; a test satellite has negligible mass. The Hill region is not an exact sphere, and being within this radius does not guarantee long-term orbital stability. Excluded: eccentricity, additional perturbations and satellite mass.",
+      "recommended_sources": [
+        {
+          "label": "University of Maryland · The Hill Radius",
+          "url": "https://pages.astro.umd.edu/~dphamil/ASTR630/handouts/HillRadius.pdf",
+          "http_status": 200,
+          "final_url": "https://pages.astro.umd.edu/~dphamil/ASTR630/handouts/HillRadius.pdf",
+          "page_title": "PDF document",
+          "content_type": "application/pdf",
+          "invalid_response": false,
+          "web_primary_verified": false,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://pages.astro.umd.edu/~dphamil/ASTR630/handouts/HillRadius.pdf",
+          "primary_organization": "pages.astro.umd.edu"
+        },
+        {
+          "label": "NASA NTRS · Debris about asteroids: Where and how much?",
+          "url": "https://ntrs.nasa.gov/citations/19930009947",
+          "http_status": 200,
+          "final_url": "https://ntrs.nasa.gov/citations/19930009947",
+          "page_title": "Debris about asteroids: Where and how much? - NASA Technical Reports Server (NTRS)",
+          "content_type": "text/html; charset=utf-8",
+          "invalid_response": false,
+          "web_primary_verified": false,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://ntrs.nasa.gov/citations/19930009947",
+          "primary_organization": "ntrs.nasa.gov"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "University of Maryland · The Hill Radius",
+          "url": "https://pages.astro.umd.edu/~dphamil/ASTR630/handouts/HillRadius.pdf"
+        },
+        {
+          "label": "NASA NTRS · Debris about asteroids: Where and how much?",
+          "url": "https://ntrs.nasa.gov/citations/19930009947"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E105",
+      "slug": "eng-fluid-roche-limit",
+      "title": "Fluid Satellite Roche Limit Calculator",
+      "formula": "d_R = 2.44 R (ρ_M/ρ_m)^(1/3)",
+      "factual_model_verified": true,
+      "topic_review": "Fluid synchronous incompressible satellite coefficient 2.44; density ratio and center distance rather than altitude.",
+      "recommended_sources": [
+        {
+          "label": "University of Texas · Roche radius",
+          "url": "https://farside.ph.utexas.edu/teaching/celestial/Celestialhtml/node55.html",
+          "http_status": 200,
+          "final_url": "https://farside.ph.utexas.edu/teaching/celestial/Celestialhtml/node55.html",
+          "page_title": "Roche radius",
+          "content_type": "text/html",
+          "invalid_response": false,
+          "web_primary_verified": true,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://farside.ph.utexas.edu/teaching/celestial/Celestialhtml/node55.html",
+          "primary_organization": "farside.ph.utexas.edu"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "University of Texas · Roche radius",
+          "url": "https://farside.ph.utexas.edu/teaching/celestial/Celestialhtml/node55.html"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E106",
+      "slug": "eng-einstein-ring",
+      "title": "Einstein Ring Angular Radius Calculator",
+      "formula": "θ_E = √[(4GM/c²)(D_S−D_L)/(D_L D_S)]",
+      "factual_model_verified": true,
+      "topic_review": "Point-mass aligned thin lens. Local Euclidean DLS=DS-DL expressly excludes general cosmological angular-diameter distances.",
+      "recommended_sources": [
+        {
+          "label": "University of Maryland · Point-mass Einstein angular radius, Eq. 7",
+          "url": "https://www.astro.umd.edu/~mcmiller/teaching/astr422/lecture13.pdf",
+          "http_status": 200,
+          "final_url": "https://pages.astro.umd.edu/~mcmiller/teaching/astr422/lecture13.pdf",
+          "page_title": "PDF document",
+          "content_type": "application/pdf",
+          "invalid_response": false,
+          "web_primary_verified": true,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://www.astro.umd.edu/~mcmiller/teaching/astr422/lecture13.pdf",
+          "primary_organization": "www.astro.umd.edu"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "Kostaros et al. · Einstein ring fingerprint, Eq. 2",
+          "url": "https://journals.aps.org/apsos/abstract/10.1103/7h39-dk84"
+        }
+      ],
+      "proposal_action": "replace",
+      "proposal_reason": "Use a direct author university lecture containing the point-mass Einstein-radius formula and explicit angular-diameter-distance warning. Current app is expressly local Euclidean.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E107",
+      "slug": "eng-eddington-luminosity",
+      "title": "Eddington Luminosity Calculator",
+      "formula": "L_Edd = 4πGMc/κ",
+      "factual_model_verified": true,
+      "topic_review": "Verified factual model: L_Edd = 4πGMc/κ. Scope reviewed: Required: M,κ>0. κ is a constant effective mass opacity for radiation momentum transfer in m²/kg, not an absorption coefficient per length. Spherical symmetry, isotropic steady radiation, Newtonian gravity and matter-radiation coupling are assumed. The example κ=0.034 m²/kg represents electron scattering; composition and opacity are not inferred. Excluded: rotation, magnetic fields, beaming, convection and general relativity. This is not an absolute luminosity ceiling for every object.",
+      "recommended_sources": [
+        {
+          "label": "MIT · Eddington luminosity and mass opacity",
+          "url": "https://www.mit.edu/~iancross/8901_2019A/pset04.pdf",
+          "http_status": 200,
+          "final_url": "https://www.mit.edu/~iancross/8901_2019A/pset04.pdf",
+          "page_title": "PDF document",
+          "content_type": "application/pdf",
+          "invalid_response": false,
+          "web_primary_verified": true,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://www.mit.edu/~iancross/8901_2019A/pset04.pdf",
+          "primary_organization": "www.mit.edu"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "University of Cambridge · Structure and Evolution of Stars, Lecture 12",
+          "url": "https://people.ast.cam.ac.uk/~phewett/SandES2017/Lec2017_12.pdf"
+        }
+      ],
+      "proposal_action": "replace",
+      "proposal_reason": "MSU URL returns an HTML interstitial rather than its PDF. MIT original teaching note states L_Edd=4πGMc/κ and the spherical opacity convention.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E108",
+      "slug": "eng-jeans-mass",
+      "title": "Jeans Mass Calculator",
+      "formula": "M_J = π^(5/2)c_s³ / (6G^(3/2)√ρ)",
+      "factual_model_verified": true,
+      "topic_review": "Jeans mass is enclosed in a sphere of diameter equal to Jeans wavelength; pi^(5/2)/6 coefficient is definition-specific.",
+      "recommended_sources": [
+        {
+          "label": "Edward L. Wright, UCLA · Astronomy 140, §22 Jeans Mass",
+          "url": "https://www.astro.ucla.edu/~wright/A140/A140.pdf",
+          "http_status": 200,
+          "final_url": "https://www.astro.ucla.edu/~wright/A140/A140.pdf",
+          "page_title": "PDF document",
+          "content_type": "application/pdf",
+          "invalid_response": false,
+          "web_primary_verified": true,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://www.astro.ucla.edu/~wright/A140/A140.pdf",
+          "primary_organization": "www.astro.ucla.edu"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "Edward L. Wright, UCLA · Astronomy 140, §22 Jeans Mass",
+          "url": "https://www.astro.ucla.edu/~wright/A140/A140.pdf"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E109",
+      "slug": "eng-gravitational-redshift",
+      "title": "Gravitational Redshift Calculator",
+      "formula": "z = √[(1−r_s/r_o)/(1−r_s/r_e)]−1; r_s=2GM/c²",
+      "factual_model_verified": true,
+      "topic_review": "Static exterior Schwarzschild observers compare gravitational clock factors; wavelength redshift convention and signed blueshift are explicit.",
+      "recommended_sources": [
+        {
+          "label": "Sean Carroll · General Relativity, Schwarzschild Solution",
+          "url": "https://ned.ipac.caltech.edu/level5/March01/Carroll3/Carroll7.html",
+          "http_status": 200,
+          "final_url": "https://ned.ipac.caltech.edu/level5/March01/Carroll3/Carroll7.html",
+          "page_title": "Lecture Notes on General Relativity - S. Carroll",
+          "content_type": "text/html; charset=ISO-8859-1",
+          "invalid_response": false,
+          "web_primary_verified": false,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://ned.ipac.caltech.edu/level5/March01/Carroll3/Carroll7.html",
+          "primary_organization": "ned.ipac.caltech.edu"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "Sean Carroll · General Relativity, Schwarzschild Solution",
+          "url": "https://ned.ipac.caltech.edu/level5/March01/Carroll3/Carroll7.html"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E110",
+      "slug": "eng-transit-depth",
+      "title": "Exoplanet Transit Depth Calculator",
+      "formula": "δ = (R_p/R_s)²",
+      "factual_model_verified": true,
+      "topic_review": "Verified factual model: δ = (R_p/R_s)². Scope reviewed: Required: 0≤R_p≤R_s and R_s>0. A uniformly bright circular star and an opaque circular planet with negligible emission are assumed. The whole planetary disk must lie inside the stellar disk during the evaluated phase. Excluded: grazing or partial overlap, limb darkening, atmosphere, reflected light, starspots and contaminating light. Orbital inclination and whether a transit occurs are not determined.",
+      "recommended_sources": [
+        {
+          "label": "NASA NTRS · Transit Method and Transit Spectroscopy, §8.2",
+          "url": "https://ntrs.nasa.gov/api/citations/20190028290/downloads/20190028290.pdf",
+          "http_status": 200,
+          "final_url": "https://ntrs.nasa.gov/api/citations/20190028290/downloads/20190028290.pdf",
+          "page_title": "PDF document",
+          "content_type": "application/pdf",
+          "invalid_response": false,
+          "web_primary_verified": false,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://ntrs.nasa.gov/api/citations/20190028290/downloads/20190028290.pdf",
+          "primary_organization": "ntrs.nasa.gov"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "NASA NTRS · Transit Method and Transit Spectroscopy, §8.2",
+          "url": "https://ntrs.nasa.gov/api/citations/20190028290/downloads/20190028290.pdf"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E111",
+      "slug": "eng-quantum-box-energy",
+      "title": "Infinite Quantum Well Energy Calculator",
+      "formula": "Eₙ = n²h² / (8mL²)",
+      "factual_model_verified": true,
+      "topic_review": "Verified factual model: Eₙ = n²h² / (8mL²). Scope reviewed: Required: m,L>0 and positive integer n. The potential is zero inside infinitely high walls. This is a single-particle nonrelativistic Schrödinger model. Excluded: spin, interactions and finite walls. The app requires Eₙ/(mc²)≤0.01.",
+      "recommended_sources": [
+        {
+          "label": "OpenStax · Quantum particle in a box",
+          "url": "https://openstax.org/books/university-physics-volume-3/pages/7-4-the-quantum-particle-in-a-box",
+          "http_status": 200,
+          "final_url": "https://openstax.org/books/university-physics-volume-3/pages/7-4-the-quantum-particle-in-a-box",
+          "page_title": "7.4 The Quantum Particle in a Box - University Physics Volume 3 | OpenStax",
+          "content_type": "text/html",
+          "invalid_response": false,
+          "web_primary_verified": false,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://openstax.org/books/university-physics-volume-3/pages/7-4-the-quantum-particle-in-a-box",
+          "primary_organization": "openstax.org"
+        },
+        {
+          "label": "NIST · 2022 CODATA fundamental constants",
+          "url": "https://physics.nist.gov/cuu/Constants/Table/allascii.txt",
+          "http_status": 200,
+          "final_url": "https://physics.nist.gov/cuu/Constants/Table/allascii.txt",
+          "page_title": "Official document",
+          "content_type": "text/plain",
+          "invalid_response": false,
+          "web_primary_verified": true,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://physics.nist.gov/cuu/Constants/Table/allascii.txt",
+          "primary_organization": "physics.nist.gov"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "OpenStax · Quantum particle in a box",
+          "url": "https://openstax.org/books/university-physics-volume-3/pages/7-4-the-quantum-particle-in-a-box"
+        },
+        {
+          "label": "NIST · 2022 CODATA fundamental constants",
+          "url": "https://physics.nist.gov/cuu/Constants/Table/allascii.txt"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E112",
+      "slug": "eng-barrier-tunneling",
+      "title": "Rectangular Barrier Transmission Calculator",
+      "formula": "E<U: T=[1+U²sinh²(κa)/(4E(U−E))]⁻¹; E=U: T=[1+mUa²/(2ℏ²)]⁻¹; E>U: T=[1+U²sin²(qa)/(4E(E−U))]⁻¹",
+      "factual_model_verified": true,
+      "topic_review": "Exact square-barrier matching supports below/at/above barrier energy. Threshold formula is the continuous limit, not a wide-barrier approximation.",
+      "recommended_sources": [
+        {
+          "label": "OpenStax · Quantum tunneling through potential barriers",
+          "url": "https://openstax.org/books/university-physics-volume-3/pages/7-6-the-quantum-tunneling-of-particles-through-potential-barriers",
+          "http_status": 200,
+          "final_url": "https://openstax.org/books/university-physics-volume-3/pages/7-6-the-quantum-tunneling-of-particles-through-potential-barriers",
+          "page_title": "7.6 The Quantum Tunneling of Particles through Potential Barriers - University Physics Volume 3 | OpenStax",
+          "content_type": "text/html",
+          "invalid_response": false,
+          "web_primary_verified": true,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://openstax.org/books/university-physics-volume-3/pages/7-6-the-quantum-tunneling-of-particles-through-potential-barriers",
+          "primary_organization": "openstax.org"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "OpenStax · Quantum tunneling through potential barriers",
+          "url": "https://openstax.org/books/university-physics-volume-3/pages/7-6-the-quantum-tunneling-of-particles-through-potential-barriers"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E113",
+      "slug": "eng-hydrogen-transition",
+      "title": "Hydrogen Transition Wavelength Calculator",
+      "formula": "1/λ = R_H(1/n𝒻² − 1/nᵢ²)",
+      "factual_model_verified": true,
+      "topic_review": "Hydrogen finite-mass Rydberg approximation is distinct from infinite-nucleus CODATA R_infinity; default explicitly labeled educational.",
+      "recommended_sources": [
+        {
+          "label": "OpenStax · Bohr model of hydrogen",
+          "url": "https://openstax.org/books/university-physics-volume-3/pages/6-4-bohrs-model-of-the-hydrogen-atom",
+          "http_status": 200,
+          "final_url": "https://openstax.org/books/university-physics-volume-3/pages/6-4-bohrs-model-of-the-hydrogen-atom",
+          "page_title": "6.4 Bohr’s Model of the Hydrogen Atom - University Physics Volume 3 | OpenStax",
+          "content_type": "text/html",
+          "invalid_response": false,
+          "web_primary_verified": false,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://openstax.org/books/university-physics-volume-3/pages/6-4-bohrs-model-of-the-hydrogen-atom",
+          "primary_organization": "openstax.org"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "OpenStax · Bohr model of hydrogen",
+          "url": "https://openstax.org/books/university-physics-volume-3/pages/6-4-bohrs-model-of-the-hydrogen-atom"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E114",
+      "slug": "eng-quantum-oscillator",
+      "title": "Quantum Harmonic Oscillator Energy Calculator",
+      "formula": "Eₙ = ℏω(n+1/2)",
+      "factual_model_verified": true,
+      "topic_review": "Verified factual model: Eₙ = ℏω(n+1/2). Scope reviewed: Required: ω>0 and nonnegative integer n. The potential is an ideal parabola with zero potential at equilibrium. Excluded: anharmonicity, damping, interactions and relativistic corrections. The input is angular frequency ω, related to frequency f in Hz by ω=2πf.",
+      "recommended_sources": [
+        {
+          "label": "OpenStax · Quantum harmonic oscillator",
+          "url": "https://openstax.org/books/university-physics-volume-3/pages/7-5-the-quantum-harmonic-oscillator",
+          "http_status": 200,
+          "final_url": "https://openstax.org/books/university-physics-volume-3/pages/7-5-the-quantum-harmonic-oscillator",
+          "page_title": "7.5 The Quantum Harmonic Oscillator - University Physics Volume 3 | OpenStax",
+          "content_type": "text/html",
+          "invalid_response": false,
+          "web_primary_verified": false,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://openstax.org/books/university-physics-volume-3/pages/7-5-the-quantum-harmonic-oscillator",
+          "primary_organization": "openstax.org"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "OpenStax · Quantum harmonic oscillator",
+          "url": "https://openstax.org/books/university-physics-volume-3/pages/7-5-the-quantum-harmonic-oscillator"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E115",
+      "slug": "eng-compton-shift",
+      "title": "Compton Scattering Wavelength Shift Calculator",
+      "formula": "Δλ = (h/(mc))(1−cos θ) = (2h/(mc))sin²(θ/2)",
+      "factual_model_verified": true,
+      "topic_review": "Verified factual model: Δλ = (h/(mc))(1−cos θ) = (2h/(mc))sin²(θ/2). Scope reviewed: Required: m>0 and 0≤θ≤π. θ is the angle between the incident and scattered photon directions. The target is an initially stationary free particle. Excluded: binding, collective scattering and medium effects. The output is the wavelength increase. An equivalent sine-squared form avoids cancellation at small angles.",
+      "recommended_sources": [
+        {
+          "label": "OpenStax · Compton effect",
+          "url": "https://openstax.org/books/university-physics-volume-3/pages/6-3-the-compton-effect",
+          "http_status": 200,
+          "final_url": "https://openstax.org/books/university-physics-volume-3/pages/6-3-the-compton-effect",
+          "page_title": "6.3 The Compton Effect - University Physics Volume 3 | OpenStax",
+          "content_type": "text/html",
+          "invalid_response": false,
+          "web_primary_verified": false,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://openstax.org/books/university-physics-volume-3/pages/6-3-the-compton-effect",
+          "primary_organization": "openstax.org"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "OpenStax · Compton effect",
+          "url": "https://openstax.org/books/university-physics-volume-3/pages/6-3-the-compton-effect"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E116",
+      "slug": "eng-photoelectric-stop",
+      "title": "Photoelectric Stopping Voltage Calculator",
+      "formula": "V_stop = (hc/λ − φ)/e, when hc/λ ≥ φ",
+      "factual_model_verified": true,
+      "topic_review": "Verified factual model: V_stop = (hc/λ − φ)/e, when hc/λ ≥ φ. Scope reviewed: Required: λ>0 and φ≥0. Supply the work function of the actual surface. Use monochromatic single-photon excitation. Excluded: multiphoton processes, thermionic emission, contact potentials and surface contamination. Below threshold the app reports no emission; at threshold V_stop=0. The result is a reverse-voltage magnitude and does not predict photocurrent or quantum efficiency.",
+      "recommended_sources": [
+        {
+          "label": "OpenStax · Photoelectric effect",
+          "url": "https://openstax.org/books/university-physics-volume-3/pages/6-2-photoelectric-effect",
+          "http_status": 200,
+          "final_url": "https://openstax.org/books/university-physics-volume-3/pages/6-2-photoelectric-effect",
+          "page_title": "6.2 Photoelectric Effect - University Physics Volume 3 | OpenStax",
+          "content_type": "text/html",
+          "invalid_response": false,
+          "web_primary_verified": false,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://openstax.org/books/university-physics-volume-3/pages/6-2-photoelectric-effect",
+          "primary_organization": "openstax.org"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "OpenStax · Photoelectric effect",
+          "url": "https://openstax.org/books/university-physics-volume-3/pages/6-2-photoelectric-effect"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E117",
+      "slug": "eng-nuclear-q-value",
+      "title": "Nuclear Reaction Q Value Calculator",
+      "formula": "Q = [Σ(Nᵢmᵢ)_initial − Σ(Nⱼmⱼ)_final]c²",
+      "factual_model_verified": true,
+      "topic_review": "Rest-mass difference convention requires consistent atomic or nuclear masses and electron bookkeeping; no outside mass database is redistributed.",
+      "recommended_sources": [
+        {
+          "label": "OpenStax · Nuclear fusion and Q value",
+          "url": "https://openstax.org/books/university-physics-volume-3/pages/10-6-nuclear-fusion",
+          "http_status": 200,
+          "final_url": "https://openstax.org/books/university-physics-volume-3/pages/10-6-nuclear-fusion",
+          "page_title": "10.6 Nuclear Fusion - University Physics Volume 3 | OpenStax",
+          "content_type": "text/html",
+          "invalid_response": false,
+          "web_primary_verified": false,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://openstax.org/books/university-physics-volume-3/pages/10-6-nuclear-fusion",
+          "primary_organization": "openstax.org"
+        },
+        {
+          "label": "NIST · 2022 CODATA fundamental constants",
+          "url": "https://physics.nist.gov/cuu/Constants/Table/allascii.txt",
+          "http_status": 200,
+          "final_url": "https://physics.nist.gov/cuu/Constants/Table/allascii.txt",
+          "page_title": "Official document",
+          "content_type": "text/plain",
+          "invalid_response": false,
+          "web_primary_verified": true,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://physics.nist.gov/cuu/Constants/Table/allascii.txt",
+          "primary_organization": "physics.nist.gov"
+        },
+        {
+          "label": "NIST · 2022 CODATA complete constants table",
+          "url": "https://physics.nist.gov/cuu/Constants/Table/allascii.txt",
+          "http_status": 200,
+          "final_url": "https://physics.nist.gov/cuu/Constants/Table/allascii.txt",
+          "page_title": "Official document",
+          "content_type": "text/plain",
+          "invalid_response": false,
+          "web_primary_verified": true,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://physics.nist.gov/cuu/Constants/Table/allascii.txt",
+          "primary_organization": "physics.nist.gov"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "OpenStax · Nuclear fusion and Q value",
+          "url": "https://openstax.org/books/university-physics-volume-3/pages/10-6-nuclear-fusion"
+        },
+        {
+          "label": "NIST · 2022 CODATA fundamental constants",
+          "url": "https://physics.nist.gov/cuu/Constants/Table/allascii.txt"
+        }
+      ],
+      "proposal_action": "append",
+      "proposal_reason": "Stable full-table corroboration of atomic mass constant and other constants; ?u works directly but the web parser may rewrite the bare query incorrectly.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E118",
+      "slug": "eng-gaussian-beam",
+      "title": "Gaussian Beam Radius Calculator",
+      "formula": "w(z) = w₀√[1+(z/z_R)²], z_R=πnw₀²/λ₀",
+      "factual_model_verified": true,
+      "topic_review": "Verified factual model: w(z) = w₀√[1+(z/z_R)²], z_R=πnw₀²/λ₀. Scope reviewed: Required: λ₀,w₀,n>0 and signed z. The radius is where intensity falls to 1/e² of its on-axis value. Assume a fundamental TEM₀₀ mode with M²=1 in a homogeneous isotropic linear lossless medium. Excluded: lenses, apertures and nonlinear propagation. The app enforces the paraxial condition λ₀/(πnw₀)≤0.1 rad. Enter the vacuum wavelength; the refractive index is applied internally.",
+      "recommended_sources": [
+        {
+          "label": "MIT OCW · Fundamentals of photonics, Gaussian beams",
+          "url": "https://www.ocw.mit.edu/courses/6-974-fundamentals-of-photonics-quantum-electronics-spring-2006/bf3bdeb971819ddc9c68719d28bb2745_classnotes.pdf",
+          "http_status": 200,
+          "final_url": "https://www.ocw.mit.edu/courses/6-974-fundamentals-of-photonics-quantum-electronics-spring-2006/bf3bdeb971819ddc9c68719d28bb2745_classnotes.pdf",
+          "page_title": "PDF document",
+          "content_type": "application/pdf",
+          "invalid_response": false,
+          "web_primary_verified": false,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://www.ocw.mit.edu/courses/6-974-fundamentals-of-photonics-quantum-electronics-spring-2006/bf3bdeb971819ddc9c68719d28bb2745_classnotes.pdf",
+          "primary_organization": "www.ocw.mit.edu"
+        },
+        {
+          "label": "COMSOL · Gaussian beam theory",
+          "url": "https://doc.comsol.com/6.3/doc/com.comsol.help.roptics/roptics_ug_optics.6.62.html",
+          "http_status": 200,
+          "final_url": "https://doc.comsol.com/6.3/doc/com.comsol.help.roptics/roptics_ug_optics.6.62.html",
+          "page_title": "COMSOL 6.3 - Gaussian Beam Theory",
+          "content_type": "text/html; charset=UTF-8",
+          "invalid_response": false,
+          "web_primary_verified": false,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://doc.comsol.com/6.3/doc/com.comsol.help.roptics/roptics_ug_optics.6.62.html",
+          "primary_organization": "doc.comsol.com"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "MIT OCW · Fundamentals of photonics, Gaussian beams",
+          "url": "https://www.ocw.mit.edu/courses/6-974-fundamentals-of-photonics-quantum-electronics-spring-2006/bf3bdeb971819ddc9c68719d28bb2745_classnotes.pdf"
+        },
+        {
+          "label": "COMSOL · Gaussian beam theory",
+          "url": "https://doc.comsol.com/6.3/doc/com.comsol.help.roptics/roptics_ug_optics.6.62.html"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E119",
+      "slug": "eng-malus-intensity",
+      "title": "Malus Law Transmitted Intensity Calculator",
+      "formula": "I = I₀ cos² θ",
+      "factual_model_verified": true,
+      "topic_review": "Verified factual model: I = I₀ cos² θ. Scope reviewed: Required: I₀≥0 and 0≤θ≤π/2. I₀ is the already linearly polarized intensity immediately before the analyzer. The one-half factor for initially unpolarized light is not applied automatically. The analyzer is ideal. Excluded: finite extinction ratio, additional absorption and reflection. Orthogonal axes give exactly zero.",
+      "recommended_sources": [
+        {
+          "label": "OpenStax · Polarization and Malus law",
+          "url": "https://openstax.org/books/university-physics-volume-3/pages/1-7-polarization",
+          "http_status": 200,
+          "final_url": "https://openstax.org/books/university-physics-volume-3/pages/1-7-polarization",
+          "page_title": "1.7 Polarization - University Physics Volume 3 | OpenStax",
+          "content_type": "text/html",
+          "invalid_response": false,
+          "web_primary_verified": false,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://openstax.org/books/university-physics-volume-3/pages/1-7-polarization",
+          "primary_organization": "openstax.org"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "OpenStax · Polarization and Malus law",
+          "url": "https://openstax.org/books/university-physics-volume-3/pages/1-7-polarization"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E120",
+      "slug": "eng-faraday-rotation",
+      "title": "Faraday Polarization Rotation Calculator",
+      "formula": "θ = V B∥ L",
+      "factual_model_verified": true,
+      "topic_review": "Verified factual model: θ = V B∥ L. Scope reviewed: Required: L≥0 and signed V and B∥. The SI units are rad/(T·m) for V and T for B∥. Use mutually consistent sign conventions for the measured Verdet constant and the field component along propagation. Assume a homogeneous linear medium with constant V at the specified wavelength, temperature and field range. The result is the accumulated single-pass rotation without folding into 180°. Excluded: round trips, cavities, absorption and magnetic saturation. No material-property database is included.",
+      "recommended_sources": [
+        {
+          "label": "Harvard · Faraday rotation demonstration",
+          "url": "https://sciencedemonstrations.fas.harvard.edu/presentations/faraday-rotation",
+          "http_status": 403,
+          "final_url": "https://sciencedemonstrations.fas.harvard.edu/presentations/faraday-rotation",
+          "transport_error": "HTTP Error 403: Forbidden",
+          "web_primary_verified": true,
+          "verification_note": "Official-source web text/index verified; direct transport limitation retained.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://sciencedemonstrations.fas.harvard.edu/presentations/faraday-rotation",
+          "primary_organization": "sciencedemonstrations.fas.harvard.edu"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "Harvard · Faraday rotation demonstration",
+          "url": "https://sciencedemonstrations.fas.harvard.edu/presentations/faraday-rotation"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E121",
+      "slug": "eng-collision-restitution",
+      "title": "Collision velocity with restitution calculator",
+      "formula": "v₁ = [(m₁ − e m₂)u₁ + (1 + e)m₂u₂] / (m₁ + m₂)",
+      "factual_model_verified": true,
+      "topic_review": "Verified factual model: v₁ = [(m₁ − e m₂)u₁ + (1 + e)m₂u₂] / (m₁ + m₂). Scope reviewed: Required: one-dimensional contact, negligible external impulse, and 0 ≤ e ≤ 1. Body 1 is behind body 2 along the positive axis, so u₁ ≥ u₂. Equal initial velocities give the unchanged limiting value. Excluded: oblique impact, rotation, and fragmentation.",
+      "recommended_sources": [
+        {
+          "label": "OpenStax — one-dimensional inelastic collisions",
+          "url": "https://openstax.org/books/college-physics/pages/8-5-inelastic-collisions-in-one-dimension",
+          "http_status": 200,
+          "final_url": "https://openstax.org/books/college-physics/pages/8-5-inelastic-collisions-in-one-dimension",
+          "page_title": "8.5 Inelastic Collisions in One Dimension - College Physics | OpenStax",
+          "content_type": "text/html",
+          "invalid_response": false,
+          "web_primary_verified": false,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://openstax.org/books/college-physics/pages/8-5-inelastic-collisions-in-one-dimension",
+          "primary_organization": "openstax.org"
+        },
+        {
+          "label": "MIT OCW · One-dimensional collision and coefficient of restitution",
+          "url": "https://ocw.mit.edu/courses/2-003j-dynamics-and-control-i-spring-2007/resources/lec06/",
+          "http_status": 200,
+          "final_url": "https://ocw.mit.edu/courses/2-003j-dynamics-and-control-i-spring-2007/resources/lec06/",
+          "page_title": "lec06.pdf | Dynamics and Control I | Mechanical Engineering | MIT OpenCourseWare",
+          "content_type": "text/html",
+          "invalid_response": false,
+          "web_primary_verified": true,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://ocw.mit.edu/courses/2-003j-dynamics-and-control-i-spring-2007/resources/lec06/",
+          "primary_organization": "ocw.mit.edu"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "OpenStax — one-dimensional inelastic collisions",
+          "url": "https://openstax.org/books/college-physics/pages/8-5-inelastic-collisions-in-one-dimension"
+        }
+      ],
+      "proposal_action": "append",
+      "proposal_reason": "Adds a direct university lecture explicitly covering restitution alongside the momentum-conservation source.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E122",
+      "slug": "eng-rolling-incline",
+      "title": "Rolling acceleration on an incline calculator",
+      "formula": "a = g sin θ / [1 + I/(m r²)]",
+      "factual_model_verified": true,
+      "topic_review": "Verified factual model: a = g sin θ / [1 + I/(m r²)]. Scope reviewed: Required: a rigid body, a uniform slope, 0 ≤ θ < 90°, and enough static friction for rolling without slip. I is about the rolling axis through the center of mass. Excluded: air drag, rolling resistance, and slipping.",
+      "recommended_sources": [
+        {
+          "label": "OpenStax — rolling motion",
+          "url": "https://openstax.org/books/university-physics-volume-1/pages/11-1-rolling-motion",
+          "http_status": 200,
+          "final_url": "https://openstax.org/books/university-physics-volume-1/pages/11-1-rolling-motion",
+          "page_title": "11.1 Rolling Motion - University Physics Volume 1 | OpenStax",
+          "content_type": "text/html",
+          "invalid_response": false,
+          "web_primary_verified": false,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://openstax.org/books/university-physics-volume-1/pages/11-1-rolling-motion",
+          "primary_organization": "openstax.org"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "OpenStax — rolling motion",
+          "url": "https://openstax.org/books/university-physics-volume-1/pages/11-1-rolling-motion"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E123",
+      "slug": "eng-gyroscope-precession",
+      "title": "Gyroscope precession calculator",
+      "formula": "Ω ≈ m g l / (I ω)",
+      "factual_model_verified": true,
+      "topic_review": "Torque over dominant spin angular momentum gives slow steady precession; Omega/omega limit, vertical-axis exclusion and nutation caveat are stated.",
+      "recommended_sources": [
+        {
+          "label": "OpenStax — precession of a gyroscope",
+          "url": "https://openstax.org/books/university-physics-volume-1/pages/11-4-precession-of-a-gyroscope",
+          "http_status": 200,
+          "final_url": "https://openstax.org/books/university-physics-volume-1/pages/11-4-precession-of-a-gyroscope",
+          "page_title": "11.4 Precession of a Gyroscope - University Physics Volume 1 | OpenStax",
+          "content_type": "text/html",
+          "invalid_response": false,
+          "web_primary_verified": false,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://openstax.org/books/university-physics-volume-1/pages/11-4-precession-of-a-gyroscope",
+          "primary_organization": "openstax.org"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "OpenStax — precession of a gyroscope",
+          "url": "https://openstax.org/books/university-physics-volume-1/pages/11-4-precession-of-a-gyroscope"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E124",
+      "slug": "eng-coriolis-horizontal",
+      "title": "Horizontal Coriolis acceleration calculator",
+      "formula": "aₕ = 2 Ω v |sin φ|",
+      "factual_model_verified": true,
+      "topic_review": "Verified factual model: aₕ = 2 Ω v |sin φ|. Scope reviewed: Required: a local horizontal tangent plane on a rotating sphere and latitude from −90° to 90°. The result is the horizontal magnitude. Direction is right of motion in the northern hemisphere and left in the southern hemisphere. Excluded: vertical motion, centrifugal acceleration, and trajectory integration.",
+      "recommended_sources": [
+        {
+          "label": "Purdue University · Coriolis acceleration",
+          "url": "https://web.ics.purdue.edu/~dchavas/teaching/interactive/coriolis.html",
+          "http_status": 200,
+          "final_url": "https://web.ics.purdue.edu/~dchavas/teaching/interactive/coriolis.html",
+          "page_title": "Coriolis acceleration · Science of the Atmosphere",
+          "content_type": "text/html",
+          "invalid_response": false,
+          "web_primary_verified": true,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://web.ics.purdue.edu/~dchavas/teaching/interactive/coriolis.html",
+          "primary_organization": "web.ics.purdue.edu"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "Purdue University — Coriolis acceleration",
+          "url": "https://web.ics.purdue.edu/~dchavas/teaching/coriolis.html"
+        }
+      ],
+      "proposal_action": "replace",
+      "proposal_reason": "Original URL is a moved-content landing page. Follow the official new path; it states a=fV and f=2Ωsinφ.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E125",
+      "slug": "eng-capstan-tension",
+      "title": "Capstan limiting rope tension calculator",
+      "formula": "Tₗ = Tₛ exp(μₛ θ)",
+      "factual_model_verified": true,
+      "topic_review": "Verified factual model: Tₗ = Tₛ exp(μₛ θ). Scope reviewed: Required: a flexible rope with negligible mass and bending stiffness, uniform static friction, and continuous drum contact. θ is the total contact wrap angle and may exceed one revolution. The result is a friction limit. Excluded: rope breaking strength, drum strength, added distributed loads, and groove effects.",
+      "recommended_sources": [
+        {
+          "label": "MIT — capstan worked example",
+          "url": "https://web.mit.edu/8.01T/www/materials/Presentations/Presentation_W03D1.pdf",
+          "http_status": 200,
+          "final_url": "https://web.mit.edu/8.01T/www/materials/Presentations/Presentation_W03D1.pdf",
+          "page_title": "PDF document",
+          "content_type": "application/pdf",
+          "invalid_response": false,
+          "web_primary_verified": false,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://web.mit.edu/8.01T/www/materials/Presentations/Presentation_W03D1.pdf",
+          "primary_organization": "web.mit.edu"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "MIT — capstan worked example",
+          "url": "https://web.mit.edu/8.01T/www/materials/Presentations/Presentation_W03D1.pdf"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E126",
+      "slug": "eng-inertial-atwood",
+      "title": "Atwood acceleration with pulley inertia calculator",
+      "formula": "a = (m₂ − m₁)g / (m₁ + m₂ + I/r²)",
+      "factual_model_verified": true,
+      "topic_review": "Verified factual model: a = (m₂ − m₁)g / (m₁ + m₂ + I/r²). Scope reviewed: Required: a massless inextensible rope, no slip at the pulley, freely moving hanging masses, and negligible axle friction and air drag. Positive acceleration means mass 2 descends; negative means mass 1 descends. I = 0 gives the ideal inertia-free pulley limit.",
+      "recommended_sources": [
+        {
+          "label": "UC San Diego — rotational dynamics and Atwood machine",
+          "url": "https://courses.physics.ucsd.edu/2007/Fall/physics2aa/documents/Lecture21-2A.pdf",
+          "http_status": 200,
+          "final_url": "https://courses.physics.ucsd.edu/2007/Fall/physics2aa/documents/Lecture21-2A.pdf",
+          "page_title": "PDF document",
+          "content_type": "application/pdf",
+          "invalid_response": false,
+          "web_primary_verified": false,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://courses.physics.ucsd.edu/2007/Fall/physics2aa/documents/Lecture21-2A.pdf",
+          "primary_organization": "courses.physics.ucsd.edu"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "UC San Diego — rotational dynamics and Atwood machine",
+          "url": "https://courses.physics.ucsd.edu/2007/Fall/physics2aa/documents/Lecture21-2A.pdf"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E127",
+      "slug": "eng-open-belt-length",
+      "title": "Exact open belt length calculator",
+      "formula": "q = |D₁ − D₂|/(2C); L = 2C√(1 − q²) + π(D₁ + D₂)/2 + |D₁ − D₂| asin(q)",
+      "factual_model_verified": true,
+      "topic_review": "Exact tangent geometry sums two straight spans and unequal contact arcs using pitch diameters. Minimum center distance prevents pulley overlap.",
+      "recommended_sources": [
+        {
+          "label": "SDP/SI — timing belt and pulley technical reference",
+          "url": "https://sdp-si.com/D820/PDFS/Technical-Section.pdf",
+          "http_status": 200,
+          "final_url": "https://sdp-si.com/D820/PDFS/Technical-Section.pdf",
+          "page_title": "PDF document",
+          "content_type": "application/pdf",
+          "invalid_response": false,
+          "web_primary_verified": false,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://sdp-si.com/D820/PDFS/Technical-Section.pdf",
+          "primary_organization": "sdp-si.com"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "SDP/SI — timing belt and pulley technical reference",
+          "url": "https://sdp-si.com/D820/PDFS/Technical-Section.pdf"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E128",
+      "slug": "eng-point-mass-inertia",
+      "title": "Point-mass moment of inertia calculator",
+      "formula": "I = Σ mᵢ rᵢ²",
+      "factual_model_verified": true,
+      "topic_review": "Verified factual model: I = Σ mᵢ rᵢ². Scope reviewed: Required: each rᵢ is the shortest perpendicular distance to the same rotation axis. Every entry is a point mass; each component’s intrinsic moment of inertia is excluded. A point on the axis has rᵢ = 0. The list supports 1 to 100 entries.",
+      "recommended_sources": [
+        {
+          "label": "OpenStax — moment of inertia and rotational kinetic energy",
+          "url": "https://openstax.org/books/university-physics-volume-1/pages/10-4-moment-of-inertia-and-rotational-kinetic-energy",
+          "http_status": 200,
+          "final_url": "https://openstax.org/books/university-physics-volume-1/pages/10-4-moment-of-inertia-and-rotational-kinetic-energy",
+          "page_title": "10.4 Moment of Inertia and Rotational Kinetic Energy - University Physics Volume 1 | OpenStax",
+          "content_type": "text/html",
+          "invalid_response": false,
+          "web_primary_verified": false,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://openstax.org/books/university-physics-volume-1/pages/10-4-moment-of-inertia-and-rotational-kinetic-energy",
+          "primary_organization": "openstax.org"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "OpenStax — moment of inertia and rotational kinetic energy",
+          "url": "https://openstax.org/books/university-physics-volume-1/pages/10-4-moment-of-inertia-and-rotational-kinetic-energy"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E129",
+      "slug": "eng-miner-fatigue",
+      "title": "Miner cumulative fatigue damage calculator",
+      "formula": "D = Σ nᵢ / Nᵢ",
+      "factual_model_verified": true,
+      "topic_review": "Verified factual model: D = Σ nᵢ / Nᵢ. Scope reviewed: Required: user-supplied fatigue lives Nᵢ appropriate to the material, load level, mean stress, and environment. Linear summation excludes load-sequence and interaction effects. D = 1 is the model’s nominal threshold and does not certify actual failure time or safety. The list supports 1 to 100 load blocks; D > 1 remains visible.",
+      "recommended_sources": [
+        {
+          "label": "NASA — cumulative fatigue damage using Miner’s rule",
+          "url": "https://ntrs.nasa.gov/api/citations/20230004376/downloads/20230004376.pdf",
+          "http_status": 200,
+          "final_url": "https://ntrs.nasa.gov/api/citations/20230004376/downloads/20230004376.pdf",
+          "page_title": "PDF document",
+          "content_type": "application/pdf",
+          "invalid_response": false,
+          "web_primary_verified": false,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://ntrs.nasa.gov/api/citations/20230004376/downloads/20230004376.pdf",
+          "primary_organization": "ntrs.nasa.gov"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "NASA — cumulative fatigue damage using Miner’s rule",
+          "url": "https://ntrs.nasa.gov/api/citations/20230004376/downloads/20230004376.pdf"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E130",
+      "slug": "eng-forced-vibration",
+      "title": "Forced-vibration steady amplitude calculator",
+      "formula": "X = F₀ / √[(k − mω²)² + (cω)²]",
+      "factual_model_verified": true,
+      "topic_review": "Verified factual model: X = F₀ / √[(k − mω²)² + (cω)²]. Scope reviewed: Required: a linear spring, viscous damping, and a direct force F₀ cos(ωt) on one degree of freedom. Transients from initial conditions are excluded. With c = 0, the result is the harmonic particular-solution amplitude; free motion does not decay. Undamped resonance with F₀ > 0 has no finite steady amplitude. ω = 0 gives static deflection F₀/k.",
+      "recommended_sources": [
+        {
+          "label": "MIT — driven and damped harmonic motion",
+          "url": "https://ocw.mit.edu/courses/3-052-nanomechanics-of-materials-and-biomaterials-spring-2007/d8d2ffa0503ad0adf0edb741ddb4e4c8_lec2_appendix.pdf",
+          "http_status": 200,
+          "final_url": "https://ocw.mit.edu/courses/3-052-nanomechanics-of-materials-and-biomaterials-spring-2007/d8d2ffa0503ad0adf0edb741ddb4e4c8_lec2_appendix.pdf",
+          "page_title": "PDF document",
+          "content_type": "application/pdf",
+          "invalid_response": false,
+          "web_primary_verified": false,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://ocw.mit.edu/courses/3-052-nanomechanics-of-materials-and-biomaterials-spring-2007/d8d2ffa0503ad0adf0edb741ddb4e4c8_lec2_appendix.pdf",
+          "primary_organization": "ocw.mit.edu"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "MIT — driven and damped harmonic motion",
+          "url": "https://ocw.mit.edu/courses/3-052-nanomechanics-of-materials-and-biomaterials-spring-2007/d8d2ffa0503ad0adf0edb741ddb4e4c8_lec2_appendix.pdf"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E131",
+      "slug": "eng-froude-number",
+      "title": "Froude Number Calculator",
+      "formula": "Fr = V / √(gD), D = A/T",
+      "factual_model_verified": true,
+      "topic_review": "Hydraulic mean depth is A/top width, distinct from A/wetted perimeter hydraulic radius.",
+      "recommended_sources": [
+        {
+          "label": "TxDOT Hydraulic Design Manual · Froude number and hydraulic mean depth",
+          "url": "https://www.txdot.gov/content/txdotoms/us/en/manuals/des/hyd/chapter-6--hydraulic-principles/section-1--open-channel-flow/froude-number.html",
+          "http_status": 200,
+          "final_url": "https://www.txdot.gov/content/txdotoms/us/en/manuals/des/hyd/chapter-6--hydraulic-principles/section-1--open-channel-flow/froude-number.html",
+          "page_title": "Froude Number",
+          "content_type": "text/html;charset=utf-8",
+          "invalid_response": false,
+          "web_primary_verified": true,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://www.txdot.gov/content/txdotoms/us/en/manuals/des/hyd/chapter-6--hydraulic-principles/section-1--open-channel-flow/froude-number.html",
+          "primary_organization": "www.txdot.gov"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "USBR: Hydraulic mean depth",
+          "url": "https://www.usbr.gov/tsc/techreferences/mands/wmm/chap02_11.html"
+        },
+        {
+          "label": "TxDOT: Hydraulic principles",
+          "url": "https://www.txdot.gov/content/txdotoms/us/en/manuals/des/hyd/chapter-6--hydraulic-principles.html"
+        }
+      ],
+      "proposal_action": "replace",
+      "proposal_reason": "Replace broad chapter navigation and unavailable USBR transport with the direct official equation page identifying D=A/T.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E132",
+      "slug": "eng-weber-number",
+      "title": "Weber Number Calculator",
+      "formula": "We = ρV²L / σ",
+      "factual_model_verified": true,
+      "topic_review": "Verified factual model: We = ρV²L / σ. Scope reviewed: Required: density, characteristic length and relative speed consistent with the chosen reference phase and phenomenon, with constant interfacial tension. Excluded: inferring universal droplet-breakup, spray or bubble-shape thresholds from We alone.",
+      "recommended_sources": [
+        {
+          "label": "MIT: Surface-tension dimensionless groups",
+          "url": "https://web.mit.edu/2.25/www/225_sect_11.html",
+          "http_status": 200,
+          "final_url": "https://web.mit.edu/2.25/www/225_sect_11.html",
+          "page_title": "Advanced Fluid Dynamics: Course 2.25: Section 11",
+          "content_type": "text/html",
+          "invalid_response": false,
+          "web_primary_verified": false,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://web.mit.edu/2.25/www/225_sect_11.html",
+          "primary_organization": "web.mit.edu"
+        },
+        {
+          "label": "MIT 2.25 · Surface-tension dimensionless groups, original notes",
+          "url": "https://web.mit.edu/2.25/www_old.bak/notes/11.pdf",
+          "http_status": 200,
+          "final_url": "https://web.mit.edu/2.25/www_old.bak/notes/11.pdf",
+          "page_title": "PDF document",
+          "content_type": "application/pdf",
+          "invalid_response": false,
+          "web_primary_verified": true,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://web.mit.edu/2.25/www_old.bak/notes/11.pdf",
+          "primary_organization": "web.mit.edu"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "MIT: Surface-tension dimensionless groups",
+          "url": "https://web.mit.edu/2.25/www/225_sect_11.html"
+        }
+      ],
+      "proposal_action": "append",
+      "proposal_reason": "Adds the original detailed teaching notes to the course section summary.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E133",
+      "slug": "eng-bond-number",
+      "title": "Bond Number Calculator",
+      "formula": "Bo = |ρ₁ − ρ₂|gL² / σ",
+      "factual_model_verified": true,
+      "topic_review": "Verified factual model: Bo = |ρ₁ − ρ₂|gL² / σ. Scope reviewed: Required: two immiscible fluids with constant densities and interfacial tension. The result is a nonnegative magnitude using the absolute density difference. Excluded: deciding interface stability or shape from fluid ordering and Bo alone.",
+      "recommended_sources": [
+        {
+          "label": "MIT: Gravity and surface-tension effects",
+          "url": "https://web.mit.edu/2.25/www/225_sect_11.html",
+          "http_status": 200,
+          "final_url": "https://web.mit.edu/2.25/www/225_sect_11.html",
+          "page_title": "Advanced Fluid Dynamics: Course 2.25: Section 11",
+          "content_type": "text/html",
+          "invalid_response": false,
+          "web_primary_verified": false,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://web.mit.edu/2.25/www/225_sect_11.html",
+          "primary_organization": "web.mit.edu"
+        },
+        {
+          "label": "MIT 2.25 · Surface tension, Bond and Weber numbers",
+          "url": "https://web.mit.edu/2.25/www_old.bak/notes/11.pdf",
+          "http_status": 200,
+          "final_url": "https://web.mit.edu/2.25/www_old.bak/notes/11.pdf",
+          "page_title": "PDF document",
+          "content_type": "application/pdf",
+          "invalid_response": false,
+          "web_primary_verified": true,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://web.mit.edu/2.25/www_old.bak/notes/11.pdf",
+          "primary_organization": "web.mit.edu"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "MIT: Gravity and surface-tension effects",
+          "url": "https://web.mit.edu/2.25/www/225_sect_11.html"
+        }
+      ],
+      "proposal_action": "append",
+      "proposal_reason": "Adds the original detailed teaching notes to the course section summary.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E134",
+      "slug": "eng-cavitation-number",
+      "title": "Cavitation Number Calculator",
+      "formula": "σc = (pabs − pv) / (ρV²/2)",
+      "factual_model_verified": true,
+      "topic_review": "Verified factual model: σc = (pabs − pv) / (ρV²/2). Scope reviewed: Required: absolute pressure, vapor pressure for the liquid temperature, and a single-phase reference liquid with reference pressure at least vapor pressure. Onset depends on geometry, roughness, nuclei and reference location. Excluded: declaring cavitation onset or absence from this index alone.",
+      "recommended_sources": [
+        {
+          "label": "USBR · Cavitation Damage Induced Failure of Spillways, Eq. F-3-1",
+          "url": "https://www.usbr.gov/ssle/damsafety/risk/BestPractices/Chapters/F3-CavitationDamageInducedFailureOfSpillways.pdf",
+          "http_status": 0,
+          "final_url": "https://www.usbr.gov/ssle/damsafety/risk/BestPractices/Chapters/F3-CavitationDamageInducedFailureOfSpillways.pdf",
+          "transport_error": "Remote end closed connection without response",
+          "web_primary_verified": true,
+          "verification_note": "Official-source web text/index verified; direct transport limitation retained.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://www.usbr.gov/ssle/damsafety/risk/BestPractices/Chapters/F3-CavitationDamageInducedFailureOfSpillways.pdf",
+          "primary_organization": "www.usbr.gov"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "USBR: Cavitation index definition",
+          "url": "https://usbr.gov/tsc/techreferences/hydraulics_lab/pubs/PAP/PAP-0443.pdf"
+        }
+      ],
+      "proposal_action": "replace",
+      "proposal_reason": "Original PAP-0443 was not independently confirmed. Official indexed F-3 guidance gives the exact absolute-pressure cavitation-index formula; direct USBR transport is unavailable in this environment.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E135",
+      "slug": "eng-hydraulic-jump",
+      "title": "Hydraulic Jump Sequent Depth Calculator",
+      "formula": "Fr₁ = V₁/√(gy₁); y₂ = y₁[√(1+8Fr₁²)−1]/2",
+      "factual_model_verified": true,
+      "topic_review": "Rectangular horizontal sequent-depth momentum relation requires upstream supercritical flow and hydrostatic end sections.",
+      "recommended_sources": [
+        {
+          "label": "FHWA · Hydraulic Design of Energy Dissipators, hydraulic jump sequent depth",
+          "url": "https://www.fhwa.dot.gov/engineering/hydraulics/pubs/06086/hec14.pdf",
+          "http_status": 200,
+          "final_url": "https://www.fhwa.dot.gov/engineering/hydraulics/pubs/06086/hec14.pdf",
+          "page_title": "PDF document",
+          "content_type": "application/pdf",
+          "invalid_response": false,
+          "web_primary_verified": true,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://www.fhwa.dot.gov/engineering/hydraulics/pubs/06086/hec14.pdf",
+          "primary_organization": "www.fhwa.dot.gov"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "USBR: Sequent-depth momentum equation",
+          "url": "https://www.usbr.gov/tsc/techreferences/hydraulics_lab/pubs/HL/HL-2012-02.pdf"
+        }
+      ],
+      "proposal_action": "replace",
+      "proposal_reason": "Reachable primary government design guide provides free rectangular hydraulic-jump sequent-depth equation and tailwater scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E136",
+      "slug": "eng-water-hammer",
+      "title": "Joukowsky Water Hammer Pressure Change Calculator",
+      "formula": "Δp = ρa(Vinitial − Vfinal)",
+      "factual_model_verified": true,
+      "topic_review": "Joukowsky initial pressure rise uses density times wave speed times initial-minus-final speed; later network transients excluded.",
+      "recommended_sources": [
+        {
+          "label": "Joseph E. Shepherd, Caltech · Water-hammer equation ΔP=ρcΔu",
+          "url": "https://shepherd.caltech.edu/EDL/Tutorials/MidwestMechanics/PushingBoundaries.pdf",
+          "http_status": 200,
+          "final_url": "https://shepherd.caltech.edu/EDL/Tutorials/MidwestMechanics/PushingBoundaries.pdf",
+          "page_title": "PDF document",
+          "content_type": "application/pdf",
+          "invalid_response": false,
+          "web_primary_verified": true,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://shepherd.caltech.edu/EDL/Tutorials/MidwestMechanics/PushingBoundaries.pdf",
+          "primary_organization": "shepherd.caltech.edu"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "AFT and Texas A&M: Water-hammer equation and scope",
+          "url": "https://www.aft.com/documents/TechnicalPapers/Understanding-Waterhammer-in-Pumping-Systems-and-Surge-Suppression-Options.pdf"
+        }
+      ],
+      "proposal_action": "replace",
+      "proposal_reason": "Original AFT URL is HTTP 404. Caltech author presentation explicitly gives Joukowsky water-hammer relation.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E137",
+      "slug": "eng-couette-force",
+      "title": "Plane Couette Flow Drag Force Calculator",
+      "formula": "F = μAV / h",
+      "factual_model_verified": true,
+      "topic_review": "Verified factual model: F = μAV / h. Scope reviewed: Required: steady laminar incompressible Newtonian flow with one stationary plate, one steadily moving plate, and constant dynamic viscosity. Excluded: pressure gradient, wall slip and edge effects. The result is the magnitude of drag opposing plate motion.",
+      "recommended_sources": [
+        {
+          "label": "MIT: Couette flow and plate shear",
+          "url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter28.pdf",
+          "http_status": 200,
+          "final_url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter28.pdf",
+          "page_title": "PDF document",
+          "content_type": "application/pdf",
+          "invalid_response": false,
+          "web_primary_verified": false,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter28.pdf",
+          "primary_organization": "ocw.mit.edu"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "MIT: Couette flow and plate shear",
+          "url": "https://ocw.mit.edu/courses/8-01sc-classical-mechanics-fall-2016/mit8_01scs22_chapter28.pdf"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E138",
+      "slug": "eng-rotating-free-surface",
+      "title": "Rotating Liquid Free-Surface Height Difference Calculator",
+      "formula": "Δz = z(r₂)−z(r₁) = ω²(r₂²−r₁²)/(2g)",
+      "factual_model_verified": true,
+      "topic_review": "Verified factual model: Δz = z(r₂)−z(r₁) = ω²(r₂²−r₁²)/(2g). Scope reviewed: Required: steady rigid-body rotation about a vertical axis, uniform gravity and constant surface pressure, with liquid present at both radii and no overflow or dry bottom. The result is z(r₂)−z(r₁), negative when the second radius is smaller. Excluded: determining absolute depth or liquid volume.",
+      "recommended_sources": [
+        {
+          "label": "Penn State: Fluids in rigid-body motion",
+          "url": "https://www.me.psu.edu/cimbala/Learning/Fluid/Rigid_body/rigid_body.htm",
+          "http_status": 200,
+          "final_url": "https://www.me.psu.edu/cimbala/Learning/Fluid/Rigid_body/rigid_body.htm",
+          "page_title": "Fluids in Rigid Body Motion",
+          "content_type": "text/html",
+          "invalid_response": false,
+          "web_primary_verified": false,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://www.me.psu.edu/cimbala/Learning/Fluid/Rigid_body/rigid_body.htm",
+          "primary_organization": "www.me.psu.edu"
+        },
+        {
+          "label": "Oberlin: Rotating liquid surface equation",
+          "url": "https://www2.oberlin.edu/physics/catalog/demonstrations/optics/rotatingwater.html",
+          "http_status": 200,
+          "final_url": "https://www2.oberlin.edu/physics/catalog/demonstrations/optics/rotatingwater.html",
+          "page_title": "Rotating Liquid Parabolic Reflector",
+          "content_type": "text/html; charset=UTF-8",
+          "invalid_response": false,
+          "web_primary_verified": false,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://www2.oberlin.edu/physics/catalog/demonstrations/optics/rotatingwater.html",
+          "primary_organization": "www2.oberlin.edu"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "Penn State: Fluids in rigid-body motion",
+          "url": "https://www.me.psu.edu/cimbala/Learning/Fluid/Rigid_body/rigid_body.htm"
+        },
+        {
+          "label": "Oberlin: Rotating liquid surface equation",
+          "url": "https://www2.oberlin.edu/physics/catalog/demonstrations/optics/rotatingwater.html"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E139",
+      "slug": "eng-circulation-lift",
+      "title": "Circulation Lift per Unit Span Calculator",
+      "formula": "L′ = ρUΓ (clockwise Γ positive, U rightward)",
+      "factual_model_verified": true,
+      "topic_review": "Clockwise-positive circulation with rightward free stream gives upward-positive lift. This is opposite the common counterclockwise convention.",
+      "recommended_sources": [
+        {
+          "label": "NASA: Kutta–Joukowski lift per unit length",
+          "url": "https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/ideal-lift-of-a-spinning-ball/",
+          "http_status": 200,
+          "final_url": "https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/ideal-lift-of-a-spinning-ball/",
+          "page_title": "Ideal Lift of a Spinning Ball | Glenn Research Center | NASA",
+          "content_type": "text/html; charset=UTF-8",
+          "invalid_response": false,
+          "web_primary_verified": false,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/ideal-lift-of-a-spinning-ball/",
+          "primary_organization": "www1.grc.nasa.gov"
+        },
+        {
+          "label": "MIT: Kutta–Joukowsky theorem",
+          "url": "https://web.mit.edu/13.021/13021_2003/Lifting%20surfaces/lectureB.htm",
+          "http_status": 200,
+          "final_url": "https://web.mit.edu/13.021/13021_2003/Lifting%20surfaces/lectureB.htm",
+          "page_title": "lecture 24B",
+          "content_type": "text/html",
+          "invalid_response": false,
+          "web_primary_verified": false,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://web.mit.edu/13.021/13021_2003/Lifting%20surfaces/lectureB.htm",
+          "primary_organization": "web.mit.edu"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "NASA: Kutta–Joukowski lift per unit length",
+          "url": "https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/ideal-lift-of-a-spinning-ball/"
+        },
+        {
+          "label": "MIT: Kutta–Joukowsky theorem",
+          "url": "https://web.mit.edu/13.021/13021_2003/Lifting%20surfaces/lectureB.htm"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E140",
+      "slug": "eng-water-wave-length",
+      "title": "Finite-Depth Gravity Wave Wavelength Calculator",
+      "formula": "(2π/T)² = gk tanh(kh), λ = 2π/k",
+      "factual_model_verified": true,
+      "topic_review": "Finite-depth linear dispersion omega squared=g*k*tanh(k*h) has one positive k; no currents, surface tension or breaking.",
+      "recommended_sources": [
+        {
+          "label": "MIT: Finite-depth gravity-wave dispersion",
+          "url": "https://web.mit.edu/fluids-modules/www/potential_flows/LecturesHTML/lec19bu/node4.html",
+          "http_status": 200,
+          "final_url": "https://web.mit.edu/fluids-modules/www/potential_flows/LecturesHTML/lec19bu/node4.html",
+          "page_title": "Dispersion Relationship",
+          "content_type": "text/html",
+          "invalid_response": false,
+          "web_primary_verified": true,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://web.mit.edu/fluids-modules/www/potential_flows/LecturesHTML/lec19bu/node4.html",
+          "primary_organization": "web.mit.edu"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "MIT: Finite-depth gravity-wave dispersion",
+          "url": "https://web.mit.edu/fluids-modules/www/potential_flows/LecturesHTML/lec19bu/node4.html"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E141",
+      "slug": "eng-resistor-thermal-noise",
+      "title": "Resistor Thermal Noise Calculator",
+      "formula": "Vₙ,rms = √(4k_BTRB)",
+      "factual_model_verified": true,
+      "topic_review": "Unloaded open-circuit classical Johnson-Nyquist RMS voltage uses equivalent noise bandwidth, not automatically a filter 3dB bandwidth.",
+      "recommended_sources": [
+        {
+          "label": "Texas Instruments — Signal Chain Noise Figure Analysis, thermal noise",
+          "url": "https://www.ti.com/lit/an/slaa652/slaa652.pdf",
+          "http_status": 200,
+          "final_url": "https://www.ti.com/lit/an/slaa652/slaa652.pdf",
+          "page_title": "PDF document",
+          "content_type": "application/pdf",
+          "invalid_response": false,
+          "web_primary_verified": true,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://www.ti.com/lit/an/slaa652/slaa652.pdf",
+          "primary_organization": "www.ti.com"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "Texas Instruments — Signal Chain Noise Figure Analysis, thermal noise",
+          "url": "https://www.ti.com/lit/an/slaa652/slaa652.pdf"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E142",
+      "slug": "eng-adc-quantization-noise",
+      "title": "ADC Quantization Noise Calculator",
+      "formula": "q = V_FS/2ᴺ; e_rms = q/√12",
+      "factual_model_verified": true,
+      "topic_review": "Uniform rounding error has RMS q/sqrt(12), q=full span/2^N; no claim of measured ADC total noise.",
+      "recommended_sources": [
+        {
+          "label": "Analog Devices — MT-001, ideal quantization error",
+          "url": "https://www.analog.com/media/en/training-seminars/tutorials/MT-001.pdf",
+          "http_status": 0,
+          "final_url": "https://www.analog.com/media/en/training-seminars/tutorials/MT-001.pdf",
+          "transport_error": "<urlopen error [Errno 11001] getaddrinfo failed>",
+          "web_primary_verified": true,
+          "verification_note": "Official-source web text/index verified; direct transport limitation retained.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://www.analog.com/media/en/training-seminars/tutorials/MT-001.pdf",
+          "primary_organization": "www.analog.com"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "Analog Devices — MT-001, ideal quantization error",
+          "url": "https://www.analog.com/media/en/training-seminars/tutorials/MT-001.pdf"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E143",
+      "slug": "eng-sampling-jitter-snr",
+      "title": "Sampling Jitter SNR Calculator",
+      "formula": "SNR_j = −20 log₁₀(2πfσt)",
+      "factual_model_verified": true,
+      "topic_review": "Small uncorrelated sinusoidal timing jitter model with total RMS jitter integration bandwidth and 0.1-rad phase-error restriction.",
+      "recommended_sources": [
+        {
+          "label": "Analog Devices — ADC SNR method and RMS timing jitter",
+          "url": "https://www.analog.com/en/resources/faqs/FAQ_Using_the_ADC_SNRmethod_what_is_the_equivalent.html",
+          "http_status": 0,
+          "final_url": "https://www.analog.com/en/resources/faqs/FAQ_Using_the_ADC_SNRmethod_what_is_the_equivalent.html",
+          "transport_error": "<urlopen error [Errno 11001] getaddrinfo failed>",
+          "web_primary_verified": true,
+          "verification_note": "Official-source web text/index verified; direct transport limitation retained.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://www.analog.com/en/resources/faqs/FAQ_Using_the_ADC_SNRmethod_what_is_the_equivalent.html",
+          "primary_organization": "www.analog.com"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "Analog Devices — ADC SNR method and RMS timing jitter",
+          "url": "https://www.analog.com/en/resources/faqs/FAQ_Using_the_ADC_SNRmethod_what_is_the_equivalent.html"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E144",
+      "slug": "eng-alias-frequency",
+      "title": "Sampling Alias Frequency Calculator",
+      "formula": "r = f mod f_s; f_alias = min(r, f_s−r)",
+      "factual_model_verified": true,
+      "topic_review": "Uniform sampling folds real single-tone frequency modulo fs into [0,fs/2]; unsigned frequency only, not phase or recoverability.",
+      "recommended_sources": [
+        {
+          "label": "Analog Devices — AC and DC Data Acquisition Signal Chains Made Easy, sampling",
+          "url": "https://www.analog.com/en/resources/analog-dialogue/articles/ac-and-dc-data-acquisition-signal-chains-made-easy.html",
+          "http_status": 0,
+          "final_url": "https://www.analog.com/en/resources/analog-dialogue/articles/ac-and-dc-data-acquisition-signal-chains-made-easy.html",
+          "transport_error": "<urlopen error [Errno 11001] getaddrinfo failed>",
+          "web_primary_verified": true,
+          "verification_note": "Official-source web text/index verified; direct transport limitation retained.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://www.analog.com/en/resources/analog-dialogue/articles/ac-and-dc-data-acquisition-signal-chains-made-easy.html",
+          "primary_organization": "www.analog.com"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "Analog Devices — AC and DC Data Acquisition Signal Chains Made Easy, sampling",
+          "url": "https://www.analog.com/en/resources/analog-dialogue/articles/ac-and-dc-data-acquisition-signal-chains-made-easy.html"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E145",
+      "slug": "eng-shannon-capacity",
+      "title": "Shannon Channel Capacity Calculator",
+      "formula": "C = B log₂(1 + 10^(SNR_dB/10))",
+      "factual_model_verified": true,
+      "topic_review": "Average-power band-limited AWGN capacity B*log2(1+linear SNR); dB converts as power ratio and bandwidths match.",
+      "recommended_sources": [
+        {
+          "label": "MIT OpenCourseWare — 6.451, Chapter 3: Capacity of AWGN channels",
+          "url": "https://ocw.mit.edu/courses/6-451-principles-of-digital-communication-ii-spring-2005/bb895c1dee9ce0b39d6846e0aa984981_MIT6_451S05_FullLecNotes.pdf",
+          "http_status": 200,
+          "final_url": "https://ocw.mit.edu/courses/6-451-principles-of-digital-communication-ii-spring-2005/bb895c1dee9ce0b39d6846e0aa984981_MIT6_451S05_FullLecNotes.pdf",
+          "page_title": "PDF document",
+          "content_type": "application/pdf",
+          "invalid_response": false,
+          "web_primary_verified": true,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://ocw.mit.edu/courses/6-451-principles-of-digital-communication-ii-spring-2005/bb895c1dee9ce0b39d6846e0aa984981_MIT6_451S05_FullLecNotes.pdf",
+          "primary_organization": "ocw.mit.edu"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "MIT OpenCourseWare — 6.451, Chapter 3: Capacity of AWGN channels",
+          "url": "https://ocw.mit.edu/courses/6-451-principles-of-digital-communication-ii-spring-2005/bb895c1dee9ce0b39d6846e0aa984981_MIT6_451S05_FullLecNotes.pdf"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E146",
+      "slug": "eng-cascade-noise-figure",
+      "title": "Cascaded Noise Figure Calculator",
+      "formula": "F_total = F₁ + Σᵢ₌₂ⁿ (Fᵢ−1)/(G₁…Gᵢ₋₁); NF = 10 log₁₀F_total",
+      "factual_model_verified": true,
+      "topic_review": "Friis noise factors are divided by all preceding linear power gains, then total factor converts to dB; row order matters.",
+      "recommended_sources": [
+        {
+          "label": "Keysight — RF Amplifier Design, Friis cascade equation",
+          "url": "https://www.keysight.com/content/dam/keysight/en/doc/gate/white-papers/5990-3356.pdf",
+          "http_status": 200,
+          "final_url": "https://www.keysight.com/content/dam/keysight/en/doc/gate/white-papers/5990-3356.pdf",
+          "page_title": "PDF document",
+          "content_type": "application/pdf",
+          "invalid_response": false,
+          "web_primary_verified": true,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://www.keysight.com/content/dam/keysight/en/doc/gate/white-papers/5990-3356.pdf",
+          "primary_organization": "www.keysight.com"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "Keysight — RF Amplifier Design, Friis cascade equation",
+          "url": "https://www.keysight.com/content/dam/keysight/en/doc/gate/white-papers/5990-3356.pdf"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E147",
+      "slug": "eng-free-space-path-loss",
+      "title": "Free-Space Path Loss Calculator",
+      "formula": "L_FS = 20 log₁₀(4πdf/c)",
+      "factual_model_verified": true,
+      "topic_review": "Verified factual model: L_FS = 20 log₁₀(4πdf/c). Scope reviewed: Required: an unobstructed free-space path and both antennas operating in each other’s far field. The tool checks only d ≥ λ; the far-field distance imposed by actual antenna dimensions requires a separate check. Excluded: antenna gains, feeder losses, polarization mismatch, ground reflection, diffraction and atmospheric absorption. This is the isotropic-reference spreading loss rather than the full link loss.",
+      "recommended_sources": [
+        {
+          "label": "FCC — FCC 03-251, Appendix: Free Space Model",
+          "url": "https://docs.fcc.gov/public/attachments/FCC-03-251A4.pdf",
+          "http_status": 200,
+          "final_url": "https://docs.fcc.gov/public/attachments/FCC-03-251A4.pdf",
+          "page_title": "PDF document",
+          "content_type": "application/pdf; charset=UTF-8",
+          "invalid_response": false,
+          "web_primary_verified": true,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://docs.fcc.gov/public/attachments/FCC-03-251A4.pdf",
+          "primary_organization": "docs.fcc.gov"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "FCC — FCC 03-251, Appendix: Free Space Model",
+          "url": "https://docs.fcc.gov/public/attachments/FCC-03-251A4.pdf"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E148",
+      "slug": "eng-coax-impedance",
+      "title": "Coaxial Characteristic Impedance Calculator",
+      "formula": "Z₀ = [√(μ₀μr/(ε₀εr))/(2π)] ln(b/a)",
+      "factual_model_verified": true,
+      "topic_review": "Lossless coaxial TEM impedance is sqrt(mu/epsilon)*ln(b/a)/(2*pi); our b is shield inner radius and a is conductor outer radius.",
+      "recommended_sources": [
+        {
+          "label": "MIT · Electromagnetic Fields and Energy, coaxial TEM line problems 14.2.1 and 14.3.1",
+          "url": "https://web.mit.edu/6.013_book/www/chapter14/14.prob.html",
+          "http_status": 200,
+          "final_url": "https://web.mit.edu/6.013_book/www/chapter14/14.prob.html",
+          "page_title": "Official document",
+          "content_type": "text/html",
+          "invalid_response": false,
+          "web_primary_verified": true,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://web.mit.edu/6.013_book/www/chapter14/14.prob.html",
+          "primary_organization": "web.mit.edu"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "NIST — Electrical Parameters of Precision Coaxial Air-Dielectric Transmission Lines",
+          "url": "https://www.nist.gov/system/files/documents/calibrations/mn96.pdf"
+        },
+        {
+          "label": "MIT — Electromagnetic Fields and Energy, TEM waves",
+          "url": "https://web.mit.edu/6.013_book/www/chapter14/14.2.html"
+        }
+      ],
+      "proposal_action": "replace",
+      "proposal_reason": "The original section 14.1 discusses generic distributed models. The replacement specifically derives coaxial line L,C and characteristic impedance; inner/outer radius letters differ and are relabeled in our original UI.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E149",
+      "slug": "eng-load-vswr",
+      "title": "Complex Load VSWR Calculator",
+      "formula": "Γ = (Z_L−Z₀)/(Z_L+Z₀); VSWR = (1+|Γ|)/(1−|Γ|)",
+      "factual_model_verified": true,
+      "topic_review": "Passive load and real positive reference give reflection coefficient; complete reflection must be infinite VSWR.",
+      "recommended_sources": [
+        {
+          "label": "Keysight — Reflection Measurements, VSWR and reflection coefficient",
+          "url": "https://helpfiles.keysight.com/csg/e5080b/Tutorials/Reflection_Measurements.htm",
+          "http_status": 200,
+          "final_url": "https://helpfiles.keysight.com/csg/e5080b/Tutorials/Reflection_Measurements.htm",
+          "page_title": "Reflection Measurements",
+          "content_type": "text/html; charset=UTF-8",
+          "invalid_response": false,
+          "web_primary_verified": true,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://helpfiles.keysight.com/csg/e5080b/Tutorials/Reflection_Measurements.htm",
+          "primary_organization": "helpfiles.keysight.com"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "Keysight — Reflection Measurements, VSWR and reflection coefficient",
+          "url": "https://helpfiles.keysight.com/csg/e5080b/Tutorials/Reflection_Measurements.htm"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E150",
+      "slug": "eng-hall-voltage",
+      "title": "Hall Voltage Calculator",
+      "formula": "V_H = IB/(nqt)",
+      "factual_model_verified": true,
+      "topic_review": "Single signed-carrier model defines current +x, B +z, thickness z and voltage V(-y)-V(+y) consistently.",
+      "recommended_sources": [
+        {
+          "label": "OpenStax — University Physics Volume 2, 11.6 The Hall Effect",
+          "url": "https://openstax.org/books/university-physics-volume-2/pages/11-6-the-hall-effect",
+          "http_status": 200,
+          "final_url": "https://openstax.org/books/university-physics-volume-2/pages/11-6-the-hall-effect",
+          "page_title": "11.6 The Hall Effect - University Physics Volume 2 | OpenStax",
+          "content_type": "text/html",
+          "invalid_response": false,
+          "web_primary_verified": false,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://openstax.org/books/university-physics-volume-2/pages/11-6-the-hall-effect",
+          "primary_organization": "openstax.org"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "OpenStax — University Physics Volume 2, 11.6 The Hall Effect",
+          "url": "https://openstax.org/books/university-physics-volume-2/pages/11-6-the-hall-effect"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E151",
+      "slug": "eng-counterflow-ntu",
+      "title": "Counterflow heat exchanger calculator",
+      "formula": "Q̇ = ε Cmin (Th,in − Tc,in); NTU = UA/Cmin; Cr = Cmin/Cmax; ε = [1 − exp(−NTU(1−Cr))]/[1 − Cr exp(−NTU(1−Cr))]; Cr = 1: ε = NTU/(1+NTU)",
+      "factual_model_verified": true,
+      "topic_review": "Counterflow NTU relation includes balanced capacity-rate limit NTU/(1+NTU); heat rate uses Cmin and inlet temperature difference.",
+      "recommended_sources": [
+        {
+          "label": "John H. Lienhard IV and V · A Heat Transfer Textbook, sixth edition, heat-exchanger effectiveness",
+          "url": "https://ahtt.mit.edu/wp-content/uploads/2024/04/AHTTv600.pdf",
+          "http_status": 200,
+          "final_url": "https://bpb-us-e1.wpmucdn.com/sites.mit.edu/dist/6/1810/files/2024/04/AHTTv600.pdf",
+          "page_title": "PDF document",
+          "content_type": "application/pdf",
+          "invalid_response": false,
+          "web_primary_verified": false,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://ahtt.mit.edu/wp-content/uploads/2024/04/AHTTv600.pdf",
+          "primary_organization": "ahtt.mit.edu"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "MIT A Heat Transfer Textbook, heat exchanger effectiveness",
+          "url": "https://ahtt.mit.edu/wp-content/uploads/2019/08/AHTTv500.pdf"
+        }
+      ],
+      "proposal_action": "replace",
+      "proposal_reason": "Original fifth-edition file is HTTP 404. Current author-hosted sixth edition is HTTP 200 PDF. Reference only, with no licensed textbook expression imported.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E152",
+      "slug": "eng-fin-efficiency",
+      "title": "Insulated-tip fin efficiency calculator",
+      "formula": "m = √(hP/(kA꜀)); η = tanh(mL)/(mL); mL → 0: η → 1",
+      "factual_model_verified": true,
+      "topic_review": "Uniform insulated-tip straight-fin efficiency tanh(mL)/(mL); zero convection/length uses limiting efficiency one.",
+      "recommended_sources": [
+        {
+          "label": "IIT Bombay Virtual Labs, heat transfer through pin fin",
+          "url": "https://htc2-iitb.vlabs.ac.in/exp/heat-transfer-pin-fin/pretest.html",
+          "http_status": 200,
+          "final_url": "https://htc2-iitb.vlabs.ac.in/exp/heat-transfer-pin-fin/pretest.html",
+          "page_title": "Virtual Labs",
+          "content_type": "text/html",
+          "invalid_response": false,
+          "web_primary_verified": false,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://htc2-iitb.vlabs.ac.in/exp/heat-transfer-pin-fin/pretest.html",
+          "primary_organization": "htc2-iitb.vlabs.ac.in"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "IIT Bombay Virtual Labs, heat transfer through pin fin",
+          "url": "https://htc2-iitb.vlabs.ac.in/exp/heat-transfer-pin-fin/pretest.html"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E153",
+      "slug": "eng-heated-slab-center",
+      "title": "Internally heated slab center temperature calculator",
+      "formula": "Tmax = Tₛ + q‴L²/(2k); 전체 두께 = 2L",
+      "factual_model_verified": true,
+      "topic_review": "Symmetric slab uniform internal generation gives center rise q*L^2/(2k) for half-thickness L and equal prescribed solid surface temperatures.",
+      "recommended_sources": [
+        {
+          "label": "Idaho National Laboratory BISON, ECAR 131 analytic heat-conduction verification",
+          "url": "https://mooseframework.inl.gov/bison/verification/ECAR_131/ECAR_131.html",
+          "http_status": 403,
+          "final_url": "https://mooseframework.inl.gov/bison/verification/ECAR_131/ECAR_131.html",
+          "transport_error": "HTTP Error 403: Forbidden",
+          "web_primary_verified": true,
+          "verification_note": "Official-source web text/index verified; direct transport limitation retained.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://mooseframework.inl.gov/bison/verification/ECAR_131/ECAR_131.html",
+          "primary_organization": "mooseframework.inl.gov"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "Idaho National Laboratory BISON, ECAR 131 analytic heat-conduction verification",
+          "url": "https://mooseframework.inl.gov/bison/verification/ECAR_131/ECAR_131.html"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E154",
+      "slug": "eng-ideal-mixing-entropy",
+      "title": "Ideal gas mixing entropy calculator",
+      "formula": "ΔSmix = −R Σ[nᵢ ln(xᵢ)]; xᵢ = nᵢ/Σnᵢ; nᵢ=0 항의 극한 = 0",
+      "factual_model_verified": true,
+      "topic_review": "Distinct ideal species mixing at equal initial temperature and pressure; identical species combine, zero amounts use limit, arbitrary row list supported.",
+      "recommended_sources": [
+        {
+          "label": "Brian Cantwell, Stanford · Thermodynamics of Reacting Mixtures, ideal-gas mixing Eq. 9.42",
+          "url": "https://web.stanford.edu/~cantwell/AA103_Course_Material/AA103%20Course%20Reference%20Texts%20from%20AA210%20and%20AA283/AA283_Ch_9_Thermodynamics_of_Reacting_Mixtures_gases_only.pdf",
+          "http_status": 200,
+          "final_url": "https://web.stanford.edu/~cantwell/AA103_Course_Material/AA103%20Course%20Reference%20Texts%20from%20AA210%20and%20AA283/AA283_Ch_9_Thermodynamics_of_Reacting_Mixtures_gases_only.pdf",
+          "page_title": "PDF document",
+          "content_type": "application/pdf",
+          "invalid_response": false,
+          "web_primary_verified": true,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://web.stanford.edu/~cantwell/AA103_Course_Material/AA103%20Course%20Reference%20Texts%20from%20AA210%20and%20AA283/AA283_Ch_9_Thermodynamics_of_Reacting_Mixtures_gases_only.pdf",
+          "primary_organization": "web.stanford.edu"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "University of Kiel, ideal gas mixing thermodynamics",
+          "url": "https://www.tf.uni-kiel.de/matwis/amat/td_kin_ii/kap_1/backbone/r_se4.html"
+        }
+      ],
+      "proposal_action": "replace",
+      "proposal_reason": "Kiel endpoint timed out. Direct author-hosted Stanford chapter derives multicomponent ideal-gas mixing entropy and distinguishes identical species.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E155",
+      "slug": "eng-reaction-equilibrium",
+      "title": "Reaction equilibrium constant calculator",
+      "formula": "K = exp(−ΔᵣG°/(RT))",
+      "factual_model_verified": true,
+      "topic_review": "Verified factual model: K = exp(−ΔᵣG°/(RT)). Scope reviewed: Required: standard molar reaction Gibbs energy at the entered temperature, matching the coefficients and direction of the written reaction. K is defined with dimensionless activities, rather than raw dimensional concentrations or pressures. Use temperature-specific Gibbs energy. Excluded: reaction rates, equilibration time and equilibrium composition.",
+      "recommended_sources": [
+        {
+          "label": "OpenStax Chemistry 2e, free energy and equilibrium",
+          "url": "https://openstax.org/books/chemistry-2e/pages/16-4-free-energy",
+          "http_status": 200,
+          "final_url": "https://openstax.org/books/chemistry-2e/pages/16-4-free-energy",
+          "page_title": "16.4 Free Energy - Chemistry 2e | OpenStax",
+          "content_type": "text/html",
+          "invalid_response": false,
+          "web_primary_verified": false,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://openstax.org/books/chemistry-2e/pages/16-4-free-energy",
+          "primary_organization": "openstax.org"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "OpenStax Chemistry 2e, free energy and equilibrium",
+          "url": "https://openstax.org/books/chemistry-2e/pages/16-4-free-energy"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E156",
+      "slug": "eng-raoult-bubble-pressure",
+      "title": "Ideal mixture bubble-point pressure calculator",
+      "formula": "P = Σ(xᵢpᵢ*); Σxᵢ = 1",
+      "factual_model_verified": true,
+      "topic_review": "Verified factual model: P = Σ(xᵢpᵢ*); Σxᵢ = 1. Scope reviewed: Required: all vapor pressures evaluated at the same temperature, ideal liquid and vapor phases, and vapor-liquid equilibrium. Excluded: activity-coefficient corrections, fugacity corrections and chemical reaction. A nonvolatile component may use zero vapor pressure. Liquid mole fractions must sum to 1; rounding differences up to 1e-10 are accepted and normalized. Enter liquid composition, rather than vapor composition.",
+      "recommended_sources": [
+        {
+          "label": "OpenStax Chemistry 2e, Raoult law",
+          "url": "https://openstax.org/books/chemistry-2e/pages/11-4-colligative-properties",
+          "http_status": 200,
+          "final_url": "https://openstax.org/books/chemistry-2e/pages/11-4-colligative-properties",
+          "page_title": "11.4 Colligative Properties - Chemistry 2e | OpenStax",
+          "content_type": "text/html",
+          "invalid_response": false,
+          "web_primary_verified": false,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://openstax.org/books/chemistry-2e/pages/11-4-colligative-properties",
+          "primary_organization": "openstax.org"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "OpenStax Chemistry 2e, Raoult law",
+          "url": "https://openstax.org/books/chemistry-2e/pages/11-4-colligative-properties"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E157",
+      "slug": "eng-electroplating-mass",
+      "title": "Electroplating deposited mass calculator",
+      "formula": "m = η I t M/(zF)",
+      "factual_model_verified": true,
+      "topic_review": "Verified factual model: m = η I t M/(zF). Scope reviewed: Required: constant current, constant current efficiency and one deposition reaction with a specified electron count. z is the positive integer electron count per deposited formula unit in the balanced electrode reaction. Side reactions are represented by η. Excluded: explicit diffusion limits, redissolution, detachment and changing mass transfer. Plating thickness additionally requires density and actual area.",
+      "recommended_sources": [
+        {
+          "label": "OpenStax Chemistry 2e, electrolysis stoichiometry",
+          "url": "https://openstax.org/books/chemistry-2e/pages/17-7-electrolysis",
+          "http_status": 200,
+          "final_url": "https://openstax.org/books/chemistry-2e/pages/17-7-electrolysis",
+          "page_title": "17.7 Electrolysis - Chemistry 2e | OpenStax",
+          "content_type": "text/html",
+          "invalid_response": false,
+          "web_primary_verified": false,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://openstax.org/books/chemistry-2e/pages/17-7-electrolysis",
+          "primary_organization": "openstax.org"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "OpenStax Chemistry 2e, electrolysis stoichiometry",
+          "url": "https://openstax.org/books/chemistry-2e/pages/17-7-electrolysis"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E158",
+      "slug": "eng-cstr-conversion",
+      "title": "First-order CSTR conversion calculator",
+      "formula": "τ = V/Q; Da = kτ; X = Da/(1+Da)",
+      "factual_model_verified": true,
+      "topic_review": "Verified factual model: τ = V/Q; Da = kτ; X = Da/(1+Da). Scope reviewed: Required: steady state, isothermal operation, perfect mixing, constant volumetric flow and density, and an irreversible first-order reaction. The rate constant must apply at the reactor temperature. Conversion assumes positive inlet reactant concentration. Excluded: startup, residence-time distributions, equilibrium limits, side reactions and multiphase transfer resistance.",
+      "recommended_sources": [
+        {
+          "label": "Carnegie Mellon University Kitchin Group, first-order CSTR balance",
+          "url": "https://kitchingroup.cheme.cmu.edu/differentiable-flowsheets/about-flowsheets/00d_single_unit_cstr.html",
+          "http_status": 200,
+          "final_url": "https://kitchingroup.cheme.cmu.edu/differentiable-flowsheets/about-flowsheets/00d_single_unit_cstr.html",
+          "page_title": "Single Unit: The CSTR (Continuous Stirred-Tank Reactor) — Differentiable Flowsheets",
+          "content_type": "text/html; charset=utf-8",
+          "invalid_response": false,
+          "web_primary_verified": false,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://kitchingroup.cheme.cmu.edu/differentiable-flowsheets/about-flowsheets/00d_single_unit_cstr.html",
+          "primary_organization": "kitchingroup.cheme.cmu.edu"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "Carnegie Mellon University Kitchin Group, first-order CSTR balance",
+          "url": "https://kitchingroup.cheme.cmu.edu/differentiable-flowsheets/about-flowsheets/00d_single_unit_cstr.html"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E159",
+      "slug": "eng-welding-line-heat",
+      "title": "Welding heat input per length calculator",
+      "formula": "H = ηUI/v; 1 kJ/mm = 10⁶ J/m",
+      "factual_model_verified": true,
+      "topic_review": "Constant arc power over speed times efficiency gives energy/length; average voltage times average current is unsuitable for pulsed power.",
+      "recommended_sources": [
+        {
+          "label": "TWI, heat input and arc energy",
+          "url": "https://www.twi-global.com/technical-knowledge/faqs/faq-what-is-the-difference-between-heat-input-and-arc-energy",
+          "http_status": 200,
+          "final_url": "https://www.twi-global.com/technical-knowledge/faqs/faq-what-is-the-difference-between-heat-input-and-arc-energy",
+          "page_title": "What is the difference between heat input and arc energy? - TWI",
+          "content_type": "text/html; charset=utf-8",
+          "invalid_response": false,
+          "web_primary_verified": false,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://www.twi-global.com/technical-knowledge/faqs/faq-what-is-the-difference-between-heat-input-and-arc-energy",
+          "primary_organization": "www.twi-global.com"
+        },
+        {
+          "label": "TWI, measurement of arc welding parameters",
+          "url": "https://www.twi-global.com/technical-knowledge/job-knowledge/measurement-of-arc-welding-parameters-139",
+          "http_status": 200,
+          "final_url": "https://www.twi-global.com/technical-knowledge/job-knowledge/measurement-of-arc-welding-parameters-139",
+          "page_title": "Measurement of Arc Welding Parameters - TWI",
+          "content_type": "text/html; charset=utf-8",
+          "invalid_response": false,
+          "web_primary_verified": false,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://www.twi-global.com/technical-knowledge/job-knowledge/measurement-of-arc-welding-parameters-139",
+          "primary_organization": "www.twi-global.com"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "TWI, heat input and arc energy",
+          "url": "https://www.twi-global.com/technical-knowledge/faqs/faq-what-is-the-difference-between-heat-input-and-arc-energy"
+        },
+        {
+          "label": "TWI, measurement of arc welding parameters",
+          "url": "https://www.twi-global.com/technical-knowledge/job-knowledge/measurement-of-arc-welding-parameters-139"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    },
+    {
+      "id": "E160",
+      "slug": "eng-bend-allowance",
+      "title": "Sheet metal bend allowance calculator",
+      "formula": "BA = θ(R + Kt); θ는 rad, 0 ≤ θ ≤ π",
+      "factual_model_verified": true,
+      "topic_review": "Neutral-axis bend arc theta*(R+K*t); theta is rotation from flat in radians, not final included angle; straight flanges excluded.",
+      "recommended_sources": [
+        {
+          "label": "SOLIDWORKS official help, K-factor bend allowance definition",
+          "url": "https://help.solidworks.com/2022/english/solidworks/sldworks/c_K_Factor.htm",
+          "http_status": 200,
+          "final_url": "https://help.solidworks.com/2022/english/solidworks/sldworks/c_K_Factor.htm",
+          "page_title": "Welcome to the SOLIDWORKS Web Help",
+          "content_type": "text/html; charset=utf-8",
+          "invalid_response": false,
+          "web_primary_verified": true,
+          "verification_note": "Official primary source directly retrieved; model formula, units and scope reviewed.",
+          "source_reference_only": true,
+          "external_material_reused": false,
+          "reuse_allowed": false,
+          "license_name": "Publisher copyright or restricted terms; no source-expression reuse permission relied upon.",
+          "license_url": "https://help.solidworks.com/2022/english/solidworks/sldworks/c_K_Factor.htm",
+          "primary_organization": "help.solidworks.com"
+        }
+      ],
+      "original_sources": [
+        {
+          "label": "SOLIDWORKS official help, K-factor bend allowance definition",
+          "url": "https://help.solidworks.com/2022/english/solidworks/sldworks/c_K_Factor.htm"
+        }
+      ],
+      "proposal_action": "keep",
+      "proposal_reason": "Official primary reference is directly relevant to formula and stated scope.",
+      "source_reference_only": true,
+      "original_code_and_assets_scope": "Original elementary JavaScript author modules and own descriptions. External sources are citation-only. No textbook prose, figures, tables, code, external fonts or downloaded assets imported by this audit. Integration inventory and runtime tests are separate."
+    }
+  ]
+}
