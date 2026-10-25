@@ -1,0 +1,57 @@
+{
+  "id": "E101",
+  "value": 6907.7552789821375,
+  "method": "Independent Python Decimal, precision 80 decimal digits; direct analytic SI equation with binary64 inputs decoded exactly, no JavaScript model imports.",
+  "value_80_digits": "6907.7552789821370520539743640530926228033044658863189280999837029027178290320575",
+  "cases": [
+    {
+      "name": "Equal masses give exactly zero",
+      "values": {
+        "initial": 1000,
+        "final": 1000
+      },
+      "expected": 0.0
+    },
+    {
+      "name": "Analytic mass ratio two",
+      "values": {
+        "initial": 2000,
+        "final": 1000,
+        "exhaust": 1000
+      },
+      "expected": 693.1471805599454
+    },
+    {
+      "name": "Close masses retain logarithmic increment",
+      "values": {
+        "initial": 1000.000000001,
+        "final": 1000
+      },
+      "expected": 2.9999682737965037e-09
+    },
+    {
+      "name": "Mass increase is outside burn model",
+      "values": {
+        "initial": 999,
+        "final": 1000
+      },
+      "throws": true
+    },
+    {
+      "name": "Light-speed exhaust rejected",
+      "values": {
+        "exhaust": 299792458
+      },
+      "throws": true
+    },
+    {
+      "name": "Classical delta v reaches light speed",
+      "values": {
+        "initial": 1e+100,
+        "final": 1,
+        "exhaust": 10000000.0
+      },
+      "throws": true
+    }
+  ]
+}

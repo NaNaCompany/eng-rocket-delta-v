@@ -1,0 +1,60 @@
+export const tool={
+  "id": "E101",
+  "slug": "eng-rocket-delta-v",
+  "title": "치올콥스키 로켓 Δv 계산기",
+  "title_en": "Tsiolkovsky Rocket Delta V Calculator",
+  "category": "우주·천체",
+  "category_en": "Space and astronomy",
+  "fields": [
+    {
+      "key": "initial",
+      "label": "연소 전 전체 질량 m₀",
+      "label_en": "Total mass before burn m₀",
+      "dimension": "mass",
+      "example": 10000,
+      "constraint": "positive",
+      "display_unit": "kg",
+      "display_value": "10000"
+    },
+    {
+      "key": "final",
+      "label": "연소 후 전체 질량 m_f",
+      "label_en": "Total mass after burn m_f",
+      "dimension": "mass",
+      "example": 1000,
+      "constraint": "positive",
+      "display_unit": "kg",
+      "display_value": "1000"
+    },
+    {
+      "key": "exhaust",
+      "label": "유효 배기속도 v_e",
+      "label_en": "Effective exhaust speed v_e",
+      "dimension": "speed",
+      "example": 3000,
+      "constraint": "positive",
+      "display_unit": "ms",
+      "display_value": "3000"
+    }
+  ],
+  "result_label": "이상적인 속도 변화량 Δv",
+  "result_label_en": "Ideal velocity change Δv",
+  "result_dimension": "speed",
+  "formula": "Δv = v_e ln(m₀/m_f)",
+  "purpose": "질량 감소와 유효 배기속도로 한 번의 이상적인 로켓 연소가 제공하는 Δv를 계산한다.",
+  "purpose_en": "Calculate the ideal delta v from one rocket burn using total masses and effective exhaust speed.",
+  "assumptions": "m₀≥m_f>0, 0<v_e<c. 두 질량은 해당 연소 직전·직후의 전체 기체 질량이다. 일정한 유효 배기속도와 같은 방향의 연속 배기를 쓰는 고전적 모델이다. 유효 배기속도에는 압력 추력의 등가 기여를 포함할 수 있다. 중력 손실·항력·외력·질량 투하·다단 분리는 제외한다. Δv≥c는 거부하며 광속에 가까운 운동에는 상대론 로켓식이 필요하다.",
+  "assumptions_en": "Required: m₀≥m_f>0 and 0<v_e<c. Both masses include the complete vehicle immediately before and after this burn. Classical motion with constant effective exhaust speed and aligned exhaust is assumed. Effective speed may include an equivalent pressure-thrust contribution. Excluded: gravity losses, drag, external forces, jettison and stage separation. Results Δv≥c are rejected; relativistic motion requires a relativistic rocket equation.",
+  "sources": [
+    {
+      "label": "NASA Glenn · Ideal Rocket Equation",
+      "url": "https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/ideal-rocket-equation/"
+    }
+  ],
+  "condition": "일정 유효 배기속도·고전적 운동·외력 없는 단일 연소 조건을 확인했습니다.",
+  "condition_en": "I confirm constant effective exhaust speed, classical motion and a single burn without external forces.",
+  "output_unit": "kms",
+  "site": "https://nanalab.kr/eng-rocket-delta-v/",
+  "repository": "https://github.com/NaNaCompany/eng-rocket-delta-v",
+  "groups": []
+};

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>치올콥스키 로켓 Δv 계산기 · 단위 변환과 공식 | NaNa Lab</title><meta name="description" content="질량 감소와 유효 배기속도로 한 번의 이상적인 로켓 연소가 제공하는 Δv를 계산한다. · 입력 단위 변환과 적용 조건을 확인하고 이상적인 속도 변화량 Δv 한 값을 계산합니다.">
+<link rel="canonical" href="https://nanalab.kr/eng-rocket-delta-v/"><meta name="robots" content="index,follow"><meta property="og:type" content="website"><meta property="og:locale" content="ko_KR"><meta property="og:title" content="치올콥스키 로켓 Δv 계산기"><meta property="og:description" content="질량 감소와 유효 배기속도로 한 번의 이상적인 로켓 연소가 제공하는 Δv를 계산한다."><meta property="og:url" content="https://nanalab.kr/eng-rocket-delta-v/"><meta property="og:image" content="https://nanalab.kr/eng-rocket-delta-v/og.png"><meta name="twitter:card" content="summary_large_image"><link rel="icon" href="icon.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css"><script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "치올콥스키 로켓 Δv 계산기", "url": "https://nanalab.kr/eng-rocket-delta-v/", "description": "질량 감소와 유효 배기속도로 한 번의 이상적인 로켓 연소가 제공하는 Δv를 계산한다.", "applicationCategory": "EducationalApplication", "operatingSystem": "Any", "inLanguage": "ko", "isAccessibleForFree": true, "author": {"@type": "Organization", "name": "NaNa Lab", "url": "https://nanalab.kr/"}}</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9767176956440077"
+        crossorigin="anonymous"></script>
+<script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s),
+                dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })
+            (window, document, 'script', 'dataLayer', 'GTM-NV2WWQXB');
+    </script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2ZYSF0173P"></script>
+<script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-2ZYSF0173P');
+    </script>
+</head><body><noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NV2WWQXB" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>
+<a class="skip" href="#calculator">계산 입력으로 이동</a>
+<header><a class="brand" href="https://nanalab.kr/">NaNa Lab <span aria-hidden="true">/</span> Engineering</a><span class="edition">E101 · 우주·천체</span></header>
+<main><p class="eyebrow">ONE FORMULA, ONE ANSWER</p><h1>치올콥스키 로켓 Δv 계산기</h1><p class="intro">질량 감소와 유효 배기속도로 한 번의 이상적인 로켓 연소가 제공하는 Δv를 계산한다.. 입력 단위를 선택하고 조건에 맞는 한 값을 구하세요.</p>
+<div class="workspace"><section class="panel"><h2>계산할 값</h2><form id="calculator" novalidate><div class="row"><label for="field-initial">연소 전 전체 질량 m₀</label><div class="input-pair"><input id="field-initial" name="initial" type="text" inputmode="decimal" value="10000" required autocomplete="off" spellcheck="false" aria-describedby="note-initial"><select id="unit-initial" name="unit-initial" aria-label="연소 전 전체 질량 m₀ 단위"><option value="kg" selected>kg</option><option value="g">g</option><option value="u">u</option></select></div><p class="field-note" id="note-initial">SI 변환 후 0보다 큰 값</p></div><div class="row"><label for="field-final">연소 후 전체 질량 m_f</label><div class="input-pair"><input id="field-final" name="final" type="text" inputmode="decimal" value="1000" required autocomplete="off" spellcheck="false" aria-describedby="note-final"><select id="unit-final" name="unit-final" aria-label="연소 후 전체 질량 m_f 단위"><option value="kg" selected>kg</option><option value="g">g</option><option value="u">u</option></select></div><p class="field-note" id="note-final">SI 변환 후 0보다 큰 값</p></div><div class="row"><label for="field-exhaust">유효 배기속도 v_e</label><div class="input-pair"><input id="field-exhaust" name="exhaust" type="text" inputmode="decimal" value="3000" required autocomplete="off" spellcheck="false" aria-describedby="note-exhaust"><select id="unit-exhaust" name="unit-exhaust" aria-label="유효 배기속도 v_e 단위"><option value="ms" selected>m/s</option><option value="kms">km/s</option><option value="kmh">km/h</option><option value="cms">cm/s</option></select></div><p class="field-note" id="note-exhaust">SI 변환 후 0보다 큰 값</p></div><label class="condition"><input type="checkbox" name="conditions" id="conditions">일정 유효 배기속도·고전적 운동·외력 없는 단일 연소 조건을 확인했습니다.</label><div class="actions"><button class="primary" type="submit">계산하기</button><button type="button" id="example">예제 넣기</button><button type="button" id="reset">비우기</button></div></form><p class="local-note">계산은 이 브라우저에서 처리합니다. 지수 표기(예: 1.2e-3)를 사용할 수 있습니다.</p><noscript>계산에는 JavaScript가 필요합니다. 아래 공식과 적용 조건은 그대로 읽을 수 있습니다.</noscript></section>
+<section id="result" class="panel output-panel" aria-labelledby="result-heading"><h2 id="result-heading">계산 결과</h2><p class="result-caption">이상적인 속도 변화량 Δv</p><output id="result-value" class="number" form="calculator" aria-live="polite">—</output><span id="output-unit-label" class="result-unit"></span><div id="output-control"><label for="output-unit">결과 표시 단위</label><select id="output-unit"><option value="ms">m/s</option><option value="kms" selected>km/s</option><option value="kmh">km/h</option><option value="cms">cm/s</option></select></div><p id="status" class="status" role="status">입력 후 계산하기를 누르세요.</p><button type="button" id="copy-result" class="copy">결과 복사</button><div class="formula"><span>FORMULA</span><p>Δv = v_e ln(m₀/m_f)</p></div></section></div>
+<section class="reference"><h2>적용 조건</h2><p>m₀≥m_f&gt;0, 0&lt;v_e&lt;c. 두 질량은 해당 연소 직전·직후의 전체 기체 질량이다. 일정한 유효 배기속도와 같은 방향의 연속 배기를 쓰는 고전적 모델이다. 유효 배기속도에는 압력 추력의 등가 기여를 포함할 수 있다. 중력 손실·항력·외력·질량 투하·다단 분리는 제외한다. Δv≥c는 거부하며 광속에 가까운 운동에는 상대론 로켓식이 필요하다.</p><p class="small">표시값은 부동소수점 근삿값입니다. 설계 안전계수와 입력하지 않은 오차 요인은 계산하지 않습니다.</p><details><summary>공식 근거와 제작 정보</summary><ul><li><a href="https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/ideal-rocket-equation/" target="_blank" rel="noopener noreferrer">NASA Glenn · Ideal Rocket Equation</a></li></ul><p class="small">코드·설명·아이콘·대표 이미지는 NaNa Lab에서 직접 작성했습니다. 연결된 자료의 본문·도판·코드를 복제하지 않았습니다.</p><p class="small">상수 기준: <a href="https://physics.nist.gov/cuu/Constants/">NIST / CODATA 2022</a>. μ₀·ε₀는 측정 기반 권고값이며 정의상수가 아닙니다. 사용 값과 정확성 구분은 <a href="SOURCES.md">출처 기록</a>에 있습니다.</p><p class="small">이 사이트에는 Google 광고·분석 및 Cloudflare 분석 코드가 포함됩니다.</p></details></section></main>
+<footer>© 2026 NaNa Lab · 직접 작성한 단일 수치 공학 도구 · <a href="https://github.com/NaNaCompany/eng-rocket-delta-v">소스 코드</a></footer><a class="more-apps" href="https://nanalab.kr/apps/">More Apps</a>
+<script type="module" src="app.js"></script>
+<script>
+(function () {
+  function ensureBeacon() {
+    // Cloudflare may inject its beacon at the edge. Reuse that script when present.
+    if (document.querySelector('script[src*="static.cloudflareinsights.com/beacon.min.js"]')) return;
+    var beacon = document.createElement('script');
+    beacon.defer = true;
+    beacon.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+    beacon.setAttribute('data-cf-beacon', JSON.stringify({token: '9f3423bb0d034d91bbe1a12afeff2429'}));
+    document.head.appendChild(beacon);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', ensureBeacon, {once: true});
+  else ensureBeacon();
+})();
+</script>
+</body></html>
